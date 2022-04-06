@@ -1,6 +1,6 @@
 CXX=g++
 CXXFLAGS=-arch arm64 -std=c++11 `sdl2-config --cflags | sed -e 's/include\/SDL2/include/'`
-LDFLAGS=`sdl2-config --libs`
+LDFLAGS=`sdl2-config --libs` -lSDL2_image
 OBJS=main.o
 EXECUTABLE=dist/spacedude
 
