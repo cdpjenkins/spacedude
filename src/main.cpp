@@ -3,33 +3,32 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
+#include "Dude.hpp"
+
 using namespace std;
 
 SDL_Texture *dude_texture;
-int x = 500;
-int y = 500;
-float angle = 0;
 
-void render(SDL_Renderer *renderer) {
+void render(SDL_Renderer *renderer, Dude *dude) {
     SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
     SDL_RenderClear(renderer);
 
     int w, h;
-    SDL_Rect dest = {.x = x, .y = y};
+    SDL_Rect dest = {.x = static_cast<int>(dude->x), .y = static_cast<int>(dude->y)};
     
     dest.x -= (dest.w / 2);
 	dest.y -= (dest.h / 2);
 
     SDL_QueryTexture(dude_texture, NULL, NULL, &dest.w, &dest.h);
 
-	SDL_RenderCopyEx(renderer, dude_texture, NULL, &dest, angle, NULL, SDL_FLIP_NONE);
-
-    // SDL_RenderCopy(renderer, dude_texture, NULL, &dest);
+	SDL_RenderCopyEx(renderer, dude_texture, NULL, &dest, dude->theta, NULL, SDL_FLIP_NONE);
 
     SDL_RenderPresent(renderer);
 }
 
 int main(int argc, char** argv) {
+    Dude dude(500.0f, 500.0f, 0.0f);
+
     int rc = SDL_Init(SDL_INIT_VIDEO);
     if (rc != 0) {
         throw exception();
@@ -67,22 +66,22 @@ int main(int argc, char** argv) {
                             quit = true;
                             break;
                         case SDLK_UP:
-                            y -= 5;
+                            dude.y -= 5;
                             break;
                         case SDLK_DOWN:
-                            y += 5;
+                            dude.y += 5;
                             break;
                         case SDLK_LEFT:
-                            x -= 5;
+                            dude.x -= 5;
                             break;
                         case SDLK_RIGHT:
-                            x += 5;
+                            dude.x += 5;
                             break;
                         case SDLK_a:
-                            angle -= 5;
+                            dude.theta -= 5;
                             break;
                         case SDLK_s:
-                            angle += 5;
+                            dude.theta += 5;
                             break;
                     }
                     break;
@@ -93,7 +92,7 @@ int main(int argc, char** argv) {
         // grid.step();
         Uint32 time_after_step_before_draw = SDL_GetTicks();
         // cout << "Time to step: " << (time_after_step_before_draw - time_before_step) << endl;
-        render(renderer);
+        render(renderer, &dude);
         SDL_UpdateWindowSurface(window);
         Uint32 time_after_draw = SDL_GetTicks();
         // cout << "Time to draw: " << (time_after_draw - time_after_step_before_draw) << endl;
