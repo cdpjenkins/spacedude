@@ -7,6 +7,8 @@ public:
     float x;
     float y;
     float theta;
+    float dx;
+    float dy;
 
     Dude(float x, float y, float theta);
 };

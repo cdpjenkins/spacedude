@@ -29,6 +29,9 @@ void render(SDL_Renderer *renderer, Dude *dude) {
 int main(int argc, char** argv) {
     Dude dude(500.0f, 500.0f, 0.0f);
 
+    bool keys[SDL_NUM_SCANCODES];
+    memset(keys, 0, sizeof(keys));
+
     int rc = SDL_Init(SDL_INIT_VIDEO);
     if (rc != 0) {
         throw exception();
@@ -60,32 +63,35 @@ int main(int argc, char** argv) {
                 case SDL_QUIT:
                     quit = true;
                     break;
+                case SDL_KEYUP:
+                    keys[e.key.keysym.scancode] = false;
+                    break;
                 case SDL_KEYDOWN:
-                    switch(e.key.keysym.sym) {
-                        case SDLK_q:
-                            quit = true;
-                            break;
-                        case SDLK_UP:
-                            dude.y -= 5;
-                            break;
-                        case SDLK_DOWN:
-                            dude.y += 5;
-                            break;
-                        case SDLK_LEFT:
-                            dude.x -= 5;
-                            break;
-                        case SDLK_RIGHT:
-                            dude.x += 5;
-                            break;
-                        case SDLK_a:
-                            dude.theta -= 5;
-                            break;
-                        case SDLK_s:
-                            dude.theta += 5;
-                            break;
-                    }
+                    keys[e.key.keysym.scancode] = true;
                     break;
             }
+        }
+
+        if (keys[SDL_SCANCODE_UP]) {
+            dude.y -= 1;
+        }
+        if (keys[SDL_SCANCODE_DOWN]) {
+            dude.y += 1;
+        }
+        if (keys[SDL_SCANCODE_RIGHT]) {
+            dude.x += 1;
+        }
+        if (keys[SDL_SCANCODE_LEFT]) {
+            dude.x -= 1;
+        }
+        if (keys[SDL_SCANCODE_A]) {
+            dude.theta -= 1;
+        }
+        if (keys[SDL_SCANCODE_S]) {
+            dude.theta += 1;
+        }
+        if (keys[SDL_SCANCODE_Q]) {
+            quit = true;
         }
 
         // Uint32 time_before_step = SDL_GetTicks();
