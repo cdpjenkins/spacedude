@@ -9,8 +9,12 @@ public:
     float theta;
     float dx;
     float dy;
+    float acceleration = 0.01;
 
     Dude(float x, float y, float theta);
+
+    void move();
+    void accelerate_forwards();
 };
 
 #endif // DUDE_HPP

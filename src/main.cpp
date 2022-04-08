@@ -73,26 +73,26 @@ int main(int argc, char** argv) {
         }
 
         if (keys[SDL_SCANCODE_UP]) {
-            dude.y -= 1;
+            dude.accelerate_forwards();
         }
         if (keys[SDL_SCANCODE_DOWN]) {
-            dude.y += 1;
+            // dude.y += 1;
         }
         if (keys[SDL_SCANCODE_RIGHT]) {
-            dude.x += 1;
+            dude.theta += 1;
+
+            cout << dude.theta << endl;
         }
         if (keys[SDL_SCANCODE_LEFT]) {
-            dude.x -= 1;
-        }
-        if (keys[SDL_SCANCODE_A]) {
             dude.theta -= 1;
-        }
-        if (keys[SDL_SCANCODE_S]) {
-            dude.theta += 1;
+
+            cout << dude.theta << endl;
         }
         if (keys[SDL_SCANCODE_Q]) {
             quit = true;
         }
+
+        dude.move();
 
         // Uint32 time_before_step = SDL_GetTicks();
         // grid.step();
