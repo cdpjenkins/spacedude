@@ -1,14 +1,20 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
+#include <list>
+
 #include "Dude.hpp"
+#include "Asteroid.hpp"
 #include "SDLContext.hpp"
+
+using namespace std;
 
 class Game {
 public:
     Game(SDLContext *sdl);
 
-    Dude dude = Dude(500.0f, 500.0f, 0.0f);
+    Dude dude = Dude(400, 400, 0);
+    list<Asteroid*> asteroids = list<Asteroid*>();
 
     void main_loop();
     void render(SDL_Renderer *renderer);

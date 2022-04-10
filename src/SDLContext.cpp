@@ -45,7 +45,11 @@ SDLContext::SDLContext() {
     SDL_SetWindowInputFocus(window);
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+
     dude_texture = IMG_LoadTexture(renderer, "assets/dude.png");
+    asteroid32_texture = IMG_LoadTexture(renderer, "assets/asteroid32.png");
+    asteroid16_texture = IMG_LoadTexture(renderer, "assets/asteroid16.png");
+    asteroid8_texture = IMG_LoadTexture(renderer, "assets/asteroid8.png");
 
     SDL_UpdateWindowSurface(window);
 }

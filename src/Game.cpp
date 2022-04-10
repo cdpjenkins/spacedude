@@ -9,6 +9,8 @@ using namespace std;
 
 Game::Game(SDLContext *sdl) {
     this->sdl = sdl;
+
+    asteroids.push_back(new Asteroid(500, 500, sdl->asteroid32_texture));
 }
 
 void Game::main_loop() {
@@ -99,8 +101,12 @@ void Game::render(SDL_Renderer *renderer) {
 	dest.y -= (dest.h / 2);
 
     SDL_QueryTexture(sdl->dude_texture, NULL, NULL, &dest.w, &dest.h);
-
 	SDL_RenderCopyEx(renderer, sdl->dude_texture, NULL, &dest, dude.theta, NULL, SDL_FLIP_NONE);
+
+    for (list<Asteroid*>::iterator it = asteroids.begin(); it != asteroids.end(); it++) {
+        Asteroid *asteroid = *it;
+        asteroid->draw(renderer);
+    }
 
     SDL_RenderPresent(renderer);
 }

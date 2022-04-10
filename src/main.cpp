@@ -12,7 +12,8 @@ using namespace std;
 SDL_Texture *dude_texture;
 
 int main(int argc, char** argv) {
-    SDLContext sdl;
+    SDLContext sdl = SDLContext();
+    cout << "just created sdl " << sdl.asteroid32_texture << endl;
     Game game = Game(&sdl);
 
     game.main_loop();
