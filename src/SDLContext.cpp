@@ -8,6 +8,9 @@
 
 using namespace std;
 
+const int WIDTH = 1280;
+const int HEIGHT = 800;
+
 SDLContext::SDLContext() {
     int rc = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK);
     if (rc != 0) {
@@ -32,7 +35,7 @@ SDLContext::SDLContext() {
     IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
 
     SDL_Window *window = SDL_CreateWindow("Spacedude!", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-                                        1280, 800,
+                                        WIDTH, HEIGHT,
                                         SDL_WINDOW_SHOWN | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_MOUSE_FOCUS);
     if (window == NULL) {
         throw exception();

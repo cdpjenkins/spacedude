@@ -17,10 +17,17 @@ Dude::Dude(float x, float y, float theta) {
 }
 
 void Dude::move() {
-    // dy += g;
+    // this is the wrong place for this!
+    const int WIDTH = 1280;
+    const int HEIGHT = 800;
 
     x += dx;
     y += dy;
+
+    if (x > WIDTH) x -= WIDTH;
+    if (x < 0) x += WIDTH;
+    if (y > HEIGHT) y -= HEIGHT;
+    if (y < 0) y += HEIGHT;
 }
 
 void Dude::accelerate_forwards() {
