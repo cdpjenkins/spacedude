@@ -71,14 +71,19 @@ int main(int argc, char** argv) {
     SDL_RaiseWindow(window);
     SDL_SetWindowInputFocus(window);
 
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     dude_texture = IMG_LoadTexture(renderer, "assets/dude.png");
 
     SDL_UpdateWindowSurface(window);
 
     SDL_Event e;
     bool quit = false;
+    Uint32 last_ticks = 0;
     while (!quit){
+        Uint32 new_ticks = SDL_GetTicks();
+        cout << new_ticks - last_ticks << endl;
+        last_ticks = new_ticks;
+
         while (SDL_PollEvent(&e)){
             switch (e.type) {
                 case SDL_QUIT:
@@ -124,13 +129,9 @@ int main(int argc, char** argv) {
         }
         if (keys[SDL_SCANCODE_RIGHT]) {
             dude.theta += 1;
-
-            cout << dude.theta << endl;
         }
         if (keys[SDL_SCANCODE_LEFT]) {
             dude.theta -= 1;
-
-            cout << dude.theta << endl;
         }
         if (keys[SDL_SCANCODE_Q]) {
             quit = true;
