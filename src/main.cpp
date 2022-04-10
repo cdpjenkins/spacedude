@@ -7,7 +7,12 @@
 
 using namespace std;
 
+const int JOYSTICK_DEAD_ZONE = 1000;
+int joystick_x = 0;
+int joystick_y = 0;
+
 SDL_Texture *dude_texture;
+SDL_Joystick* gGameController = NULL;
 
 void render(SDL_Renderer *renderer, Dude *dude) {
     SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
@@ -32,16 +37,32 @@ int main(int argc, char** argv) {
     bool keys[SDL_NUM_SCANCODES];
     memset(keys, 0, sizeof(keys));
 
-    int rc = SDL_Init(SDL_INIT_VIDEO);
+    int rc = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK);
     if (rc != 0) {
         throw exception();
+    }
+
+    cout << "Number of joysticks: " << SDL_NumJoysticks() << endl;
+
+    if( SDL_NumJoysticks() < 1 )
+    {
+        printf( "Warning: No joysticks connected!\n" );
+    } else {
+        gGameController = SDL_JoystickOpen(0);
+        if( gGameController == NULL )
+        {
+            printf( "Warning: Unable to open game controller! SDL Error: %s\n", SDL_GetError() );
+            throw exception();
+        }
+
+        cout << "We operned joystick 1. It'd better work!!!1" << endl;
     }
 
     IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
 
     SDL_Window *window = SDL_CreateWindow("Spacedude!", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                                         1280, 800,
-                                        SDL_WINDOW_SHOWN | SDL_WINDOW_ALWAYS_ON_TOP | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_MOUSE_FOCUS);
+                                        SDL_WINDOW_SHOWN | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_MOUSE_FOCUS);
     if (window == NULL) {
         throw exception();
     }
@@ -69,7 +90,30 @@ int main(int argc, char** argv) {
                 case SDL_KEYDOWN:
                     keys[e.key.keysym.scancode] = true;
                     break;
+                case SDL_JOYAXISMOTION:
+                    if(e.jaxis.axis == 0 ) {
+                        cout << "Joystick x: " << e.jaxis.value << endl;
+                        if (abs(e.jaxis.value) > JOYSTICK_DEAD_ZONE) {
+                            joystick_x = e.jaxis.value;
+                        } else {
+                            joystick_x = 0;
+                        }
+                    } else if (e.jaxis.axis == 1) {
+                        cout << "Joystick y: " << e.jaxis.value << endl;
+                        if (abs(e.jaxis.value) > JOYSTICK_DEAD_ZONE) {
+                            joystick_y = e.jaxis.value;
+                        } else {
+                            joystick_y = 0;
+                        }
+                    } else {
+                        cout << "Something else: " << e.jaxis.axis << endl;
+                    }
+
             }
+        }
+
+        if (joystick_x != 0 && joystick_y != 0) {
+            dude.theta = atan2(joystick_x, -joystick_y) * 180 / M_PI;
         }
 
         if (keys[SDL_SCANCODE_UP]) {
@@ -103,6 +147,16 @@ int main(int argc, char** argv) {
         Uint32 time_after_draw = SDL_GetTicks();
         // cout << "Time to draw: " << (time_after_draw - time_after_step_before_draw) << endl;
     }
+
+    SDL_JoystickClose( gGameController );
+    gGameController = NULL;
+
+    //Destroy window    
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+
+    IMG_Quit();
+    SDL_Quit();
 
     return 0;
 }

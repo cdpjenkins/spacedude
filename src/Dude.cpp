@@ -17,7 +17,7 @@ Dude::Dude(float x, float y, float theta) {
 }
 
 void Dude::move() {
-    dy += g;
+    // dy += g;
 
     x += dx;
     y += dy;
@@ -29,7 +29,7 @@ void Dude::accelerate_forwards() {
     float dir_x = sin(radians);
     float dir_y = cos(radians);
 
-    cout << dir_x << "," << dir_y << endl;
+    // cout << dir_x << "," << dir_y << endl;
 
     dx += dir_x * acceleration;
     dy -= dir_y * acceleration;
