@@ -5,7 +5,7 @@
 
 #include "Dude.hpp"
 #include "SDLContext.hpp"
-#include "App.hpp"
+#include "Game.hpp"
 
 using namespace std;
 
@@ -13,9 +13,9 @@ SDL_Texture *dude_texture;
 
 int main(int argc, char** argv) {
     SDLContext sdl;
-    App app = App(&sdl);
+    Game game = Game(&sdl);
 
-    app.main_loop();
+    game.main_loop();
 
     return 0;
 }

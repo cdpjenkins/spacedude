@@ -1,12 +1,12 @@
-#ifndef APP_HPP
-#define APP_HPP
+#ifndef GAME_HPP
+#define GAME_HPP
 
 #include "Dude.hpp"
 #include "SDLContext.hpp"
 
-class App {
+class Game {
 public:
-    App(SDLContext *sdl);
+    Game(SDLContext *sdl);
 
     Dude dude = Dude(500.0f, 500.0f, 0.0f);
 
@@ -22,4 +22,4 @@ private:
     int joystick_y = 0;
 };
 
-#endif // APP_HPP
+#endif // GAME_HPP

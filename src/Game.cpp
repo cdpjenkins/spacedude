@@ -2,16 +2,16 @@
 
 #include <SDL2/SDL.h>
 
-#include "App.hpp"
+#include "Game.hpp"
 #include "SDLContext.hpp"
 
 using namespace std;
 
-App::App(SDLContext *sdl) {
+Game::Game(SDLContext *sdl) {
     this->sdl = sdl;
 }
 
-void App::main_loop() {
+void Game::main_loop() {
     bool keys[SDL_NUM_SCANCODES];
     memset(keys, 0, sizeof(keys));
 
@@ -88,7 +88,7 @@ void App::main_loop() {
     }
 }
 
-void App::render(SDL_Renderer *renderer) {
+void Game::render(SDL_Renderer *renderer) {
     SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
     SDL_RenderClear(renderer);
 
