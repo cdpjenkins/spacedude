@@ -11,6 +11,7 @@ public:
     Dude dude = Dude(500.0f, 500.0f, 0.0f);
 
     void main_loop();
+    void render(SDL_Renderer *renderer);
 
 private:
     const int JOYSTICK_DEAD_ZONE = 1000;

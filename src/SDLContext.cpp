@@ -54,20 +54,3 @@ SDLContext::~SDLContext() {
     SDL_JoystickClose( joystick );
     SDL_Quit();
 }
-
-void SDLContext::render(Dude *dude) {
-    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
-    SDL_RenderClear(renderer);
-
-    int w, h;
-    SDL_Rect dest = {.x = static_cast<int>(dude->x), .y = static_cast<int>(dude->y)};
-    
-    dest.x -= (dest.w / 2);
-	dest.y -= (dest.h / 2);
-
-    SDL_QueryTexture(dude_texture, NULL, NULL, &dest.w, &dest.h);
-
-	SDL_RenderCopyEx(renderer, dude_texture, NULL, &dest, dude->theta, NULL, SDL_FLIP_NONE);
-
-    SDL_RenderPresent(renderer);
-}

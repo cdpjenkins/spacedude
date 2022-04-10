@@ -82,9 +82,25 @@ void App::main_loop() {
         // grid.step();
         Uint32 time_after_step_before_draw = SDL_GetTicks();
         // cout << "Time to step: " << (time_after_step_before_draw - time_before_step) << endl;
-        sdl->render(&dude);
+        render(sdl->renderer);
         Uint32 time_after_draw = SDL_GetTicks();
         // cout << "Time to draw: " << (time_after_draw - time_after_step_before_draw) << endl;
     }
+}
 
+void App::render(SDL_Renderer *renderer) {
+    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
+    SDL_RenderClear(renderer);
+
+    int w, h;
+    SDL_Rect dest = {.x = static_cast<int>(dude.x), .y = static_cast<int>(dude.y)};
+    
+    dest.x -= (dest.w / 2);
+	dest.y -= (dest.h / 2);
+
+    SDL_QueryTexture(sdl->dude_texture, NULL, NULL, &dest.w, &dest.h);
+
+	SDL_RenderCopyEx(renderer, sdl->dude_texture, NULL, &dest, dude.theta, NULL, SDL_FLIP_NONE);
+
+    SDL_RenderPresent(renderer);
 }

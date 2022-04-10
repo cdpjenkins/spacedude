@@ -10,13 +10,13 @@ public:
     SDLContext();
     ~SDLContext();
 
-    void render(Dude *dude);
+    // this is the wrong place for this
+    SDL_Texture *dude_texture = NULL;
+    SDL_Renderer *renderer = NULL;
 
 private:
     SDL_Joystick* joystick = NULL;
     SDL_Window *window = NULL;
-    SDL_Renderer *renderer = NULL;
-    SDL_Texture *dude_texture = NULL;
 };
 
 #endif // SDL_CONTEXT_HPP
