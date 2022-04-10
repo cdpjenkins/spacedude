@@ -1,5 +1,6 @@
+ARCH=
 CXX=g++
-CXXFLAGS=-arch arm64 -std=c++11 `sdl2-config --cflags | sed -e 's/include\/SDL2/include/'`
+CXXFLAGS=$(ARCH) -std=c++11 `sdl2-config --cflags | sed -e 's/include\/SDL2/include/'`
 LDFLAGS=`sdl2-config --libs` -lSDL2_image
 SRCS=$(wildcard src/*.cpp)
 OBJS=$(SRCS:.cpp=.o)
@@ -19,5 +20,5 @@ src/%.o: src/%.cpp src/*.hpp
 	${CXX} -c $(CXXFLAGS) $< -o $@
 
 $(EXECUTABLE): $(OBJS) ${HEADERS}
-	g++ $(LDFLAGS) $(CXXFLAGS) $(OBJS) -o $(EXECUTABLE)
+	g++ $(CXXFLAGS) $(OBJS) $(LDFLAGS) -o $(EXECUTABLE)
 
