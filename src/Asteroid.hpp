@@ -3,7 +3,9 @@
 
 #include <SDL2/SDL.h>
 
-class Asteroid {
+#include "Entity.hpp"
+
+class Asteroid : public Entity {
 public:
     float x;
     float y;

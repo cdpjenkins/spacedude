@@ -7,15 +7,24 @@
 
 using namespace std;
 
-Game::Game(SDLContext *sdl)
-    : dude(600, 400, 0) {
+Game::Game(SDLContext *sdl) {
     this->sdl = sdl;
+
+    dude = new Dude(600, 400, 0, sdl->dude_texture);
 
     asteroids.push_back(new Asteroid(200, 200, 1.3, 0.46, sdl->asteroid8_texture));
     asteroids.push_back(new Asteroid(300, 300, -0.42, -0.2, sdl->asteroid16_texture));
     asteroids.push_back(new Asteroid(400, 400, -1.1, -1.2, sdl->asteroid32_texture));
     asteroids.push_back(new Asteroid(500, 500, -0.9, 2.7, sdl->asteroid64_texture));
     asteroids.push_back(new Asteroid(600, 600, 0.7001, 2.2, sdl->asteroid128_texture));
+}
+
+Game::~Game() {
+    for (auto& asteroid : asteroids) {
+        delete asteroid;
+    }
+
+    delete dude;
 }
 
 void Game::main_loop() {
@@ -58,31 +67,30 @@ void Game::main_loop() {
                     } else {
                         cout << "Something else: " << e.jaxis.axis << endl;
                     }
-
             }
         }
 
         if (joystick_x != 0 && joystick_y != 0) {
-            dude.theta = atan2(joystick_x, -joystick_y) * 180 / M_PI;
+            dude->theta = atan2(joystick_x, -joystick_y) * 180 / M_PI;
         }
 
         if (keys[SDL_SCANCODE_UP]) {
-            dude.accelerate_forwards();
+            dude->accelerate_forwards();
         }
         if (keys[SDL_SCANCODE_DOWN]) {
             // dude.y += 1;
         }
         if (keys[SDL_SCANCODE_RIGHT]) {
-            dude.theta += 1;
+            dude->theta += 1;
         }
         if (keys[SDL_SCANCODE_LEFT]) {
-            dude.theta -= 1;
+            dude->theta -= 1;
         }
         if (keys[SDL_SCANCODE_Q]) {
             quit = true;
         }
 
-        dude.move();
+        dude->move();
         for (auto const& asteroid : asteroids) {
             asteroid->move();
         }
@@ -95,14 +103,7 @@ void Game::render(SDL_Renderer *renderer) {
     SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
     SDL_RenderClear(renderer);
 
-    int w, h;
-    SDL_Rect dest = {.x = static_cast<int>(dude.x), .y = static_cast<int>(dude.y)};
-    
-    dest.x -= (dest.w / 2);
-	dest.y -= (dest.h / 2);
-
-    SDL_QueryTexture(sdl->dude_texture, NULL, NULL, &dest.w, &dest.h);
-	SDL_RenderCopyEx(renderer, sdl->dude_texture, NULL, &dest, dude.theta, NULL, SDL_FLIP_NONE);
+    dude->draw(renderer);
 
     for (list<Asteroid*>::iterator it = asteroids.begin(); it != asteroids.end(); it++) {
         Asteroid *asteroid = *it;

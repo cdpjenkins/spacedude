@@ -12,8 +12,9 @@ using namespace std;
 class Game {
 public:
     Game(SDLContext *sdl);
+    ~Game();
 
-    Dude dude;
+    Dude *dude = NULL;
     list<Asteroid*> asteroids = list<Asteroid*>();
 
     void main_loop();
