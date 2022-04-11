@@ -5,6 +5,7 @@
 
 #include "Dude.hpp"
 #include "Asteroid.hpp"
+#include "Bullet.hpp"
 #include "SDLContext.hpp"
 
 using namespace std;

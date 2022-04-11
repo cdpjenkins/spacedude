@@ -89,6 +89,9 @@ void Game::main_loop() {
         if (keys[SDL_SCANCODE_Q]) {
             quit = true;
         }
+        if (keys[SDL_SCANCODE_A]) {
+            // new Bullet();
+        }
 
         dude->move();
         for (auto const& asteroid : entities) {
