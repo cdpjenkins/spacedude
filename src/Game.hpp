@@ -15,7 +15,7 @@ public:
     ~Game();
 
     Dude *dude = NULL;
-    list<Asteroid*> asteroids = list<Asteroid*>();
+    list<Entity*> entities = list<Entity*>();
 
     void main_loop();
     void render(SDL_Renderer *renderer);

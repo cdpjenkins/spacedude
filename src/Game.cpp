@@ -12,15 +12,15 @@ Game::Game(SDLContext *sdl) {
 
     dude = new Dude(600, 400, 0, sdl->dude_texture);
 
-    asteroids.push_back(new Asteroid(200, 200, 1.3, 0.46, sdl->asteroid8_texture));
-    asteroids.push_back(new Asteroid(300, 300, -0.42, -0.2, sdl->asteroid16_texture));
-    asteroids.push_back(new Asteroid(400, 400, -1.1, -1.2, sdl->asteroid32_texture));
-    asteroids.push_back(new Asteroid(500, 500, -0.9, 2.7, sdl->asteroid64_texture));
-    asteroids.push_back(new Asteroid(600, 600, 0.7001, 2.2, sdl->asteroid128_texture));
+    entities.push_back(new Asteroid(200, 200, 1.3, 0.46, sdl->asteroid8_texture));
+    entities.push_back(new Asteroid(300, 300, -0.42, -0.2, sdl->asteroid16_texture));
+    entities.push_back(new Asteroid(400, 400, -1.1, -1.2, sdl->asteroid32_texture));
+    entities.push_back(new Asteroid(500, 500, -0.9, 2.7, sdl->asteroid64_texture));
+    entities.push_back(new Asteroid(600, 600, 0.7001, 2.2, sdl->asteroid128_texture));
 }
 
 Game::~Game() {
-    for (auto& asteroid : asteroids) {
+    for (auto& asteroid : entities) {
         delete asteroid;
     }
 
@@ -91,7 +91,7 @@ void Game::main_loop() {
         }
 
         dude->move();
-        for (auto const& asteroid : asteroids) {
+        for (auto const& asteroid : entities) {
             asteroid->move();
         }
 
@@ -105,9 +105,8 @@ void Game::render(SDL_Renderer *renderer) {
 
     dude->draw(renderer);
 
-    for (list<Asteroid*>::iterator it = asteroids.begin(); it != asteroids.end(); it++) {
-        Asteroid *asteroid = *it;
-        asteroid->draw(renderer);
+    for (auto& entity : entities) {
+        entity->draw(renderer);
     }
 
     SDL_RenderPresent(renderer);
