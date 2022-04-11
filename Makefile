@@ -7,7 +7,7 @@ OBJS=$(SRCS:.cpp=.o)
 HEADERS=${wildcard src/*.hpp}
 EXECUTABLE=dist/spacedude
 
-all: make-dist $(EXECUTABLE) 
+all: make-dist copy-assets $(EXECUTABLE) 
 
 clean:
 	rm -rf dist
@@ -15,6 +15,9 @@ clean:
 
 make-dist:
 	mkdir -p dist
+
+copy-assets:
+	cp -pr assets dist
 
 src/%.o: src/%.cpp src/*.hpp
 	${CXX} -c $(CXXFLAGS) $< -o $@
