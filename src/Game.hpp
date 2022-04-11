@@ -13,7 +13,7 @@ class Game {
 public:
     Game(SDLContext *sdl);
 
-    Dude dude = Dude(400, 400, 0);
+    Dude dude;
     list<Asteroid*> asteroids = list<Asteroid*>();
 
     void main_loop();

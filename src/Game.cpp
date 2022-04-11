@@ -7,7 +7,8 @@
 
 using namespace std;
 
-Game::Game(SDLContext *sdl) {
+Game::Game(SDLContext *sdl)
+    : dude(600, 400, 0) {
     this->sdl = sdl;
 
     asteroids.push_back(new Asteroid(200, 200, sdl->asteroid8_texture));
