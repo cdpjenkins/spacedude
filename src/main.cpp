@@ -13,8 +13,6 @@ SDL_Texture *dude_texture;
 
 int main(int argc, char** argv) {
     SDLContext sdl = SDLContext();
-    cout << "just created sdl " << sdl.asteroid32_texture << endl;
-    cout << "just created sdl " << sdl.asteroid64_texture << endl;
 
     Game game = Game(&sdl);
 

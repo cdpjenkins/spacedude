@@ -11,11 +11,11 @@ Game::Game(SDLContext *sdl)
     : dude(600, 400, 0) {
     this->sdl = sdl;
 
-    asteroids.push_back(new Asteroid(200, 200, sdl->asteroid8_texture));
-    asteroids.push_back(new Asteroid(300, 300, sdl->asteroid16_texture));
-    asteroids.push_back(new Asteroid(400, 400, sdl->asteroid32_texture));
-    asteroids.push_back(new Asteroid(500, 500, sdl->asteroid64_texture));
-    asteroids.push_back(new Asteroid(600, 600, sdl->asteroid128_texture));
+    asteroids.push_back(new Asteroid(200, 200, 1.3, 0.46, sdl->asteroid8_texture));
+    asteroids.push_back(new Asteroid(300, 300, -0.42, -0.2, sdl->asteroid16_texture));
+    asteroids.push_back(new Asteroid(400, 400, -1.1, -1.2, sdl->asteroid32_texture));
+    asteroids.push_back(new Asteroid(500, 500, -0.9, 2.7, sdl->asteroid64_texture));
+    asteroids.push_back(new Asteroid(600, 600, 0.7001, 2.2, sdl->asteroid128_texture));
 }
 
 void Game::main_loop() {
@@ -83,6 +83,10 @@ void Game::main_loop() {
         }
 
         dude.move();
+        for (auto const& asteroid : asteroids) {
+            asteroid->move();
+        }
+
         render(sdl->renderer);
     }
 }

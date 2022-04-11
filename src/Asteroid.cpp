@@ -6,9 +6,11 @@
 
 using namespace std;
 
-Asteroid::Asteroid(float x, float y, SDL_Texture *texture) {
+Asteroid::Asteroid(float x, float y, float vx, float vy, SDL_Texture *texture) {
     this->x = x;
     this->y = y;
+    this->vx = vx;
+    this->vy = vy;
     this->texture = texture;
 }
 
@@ -22,4 +24,18 @@ void Asteroid::draw(SDL_Renderer *renderer) {
     SDL_QueryTexture(texture, NULL, NULL, &dest.w, &dest.h);
 
 	SDL_RenderCopyEx(renderer, texture, NULL, &dest, 0, NULL, SDL_FLIP_NONE);
+}
+
+void Asteroid::move() {
+    // this is the wrong place for this!
+    const int WIDTH = 1280;
+    const int HEIGHT = 800;
+
+    x += vx;
+    y += vy;
+
+    if (x > WIDTH) x -= WIDTH;
+    if (x < 0) x += WIDTH;
+    if (y > HEIGHT) y -= HEIGHT;
+    if (y < 0) y += HEIGHT;
 }
