@@ -47,6 +47,9 @@ SDLContext::SDLContext() {
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
     dude_texture = IMG_LoadTexture(renderer, "assets/dude.png");
+
+    asteroid128_texture = IMG_LoadTexture(renderer, "assets/asteroid128.png");
+    asteroid64_texture = IMG_LoadTexture(renderer, "assets/asteroid64.png");
     asteroid32_texture = IMG_LoadTexture(renderer, "assets/asteroid32.png");
     asteroid16_texture = IMG_LoadTexture(renderer, "assets/asteroid16.png");
     asteroid8_texture = IMG_LoadTexture(renderer, "assets/asteroid8.png");

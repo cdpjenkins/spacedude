@@ -10,7 +10,11 @@ using namespace std;
 Game::Game(SDLContext *sdl) {
     this->sdl = sdl;
 
-    asteroids.push_back(new Asteroid(500, 500, sdl->asteroid32_texture));
+    asteroids.push_back(new Asteroid(200, 200, sdl->asteroid8_texture));
+    asteroids.push_back(new Asteroid(300, 300, sdl->asteroid16_texture));
+    asteroids.push_back(new Asteroid(400, 400, sdl->asteroid32_texture));
+    asteroids.push_back(new Asteroid(500, 500, sdl->asteroid64_texture));
+    asteroids.push_back(new Asteroid(600, 600, sdl->asteroid128_texture));
 }
 
 void Game::main_loop() {
@@ -21,10 +25,9 @@ void Game::main_loop() {
     bool quit = false;
     Uint32 last_ticks = 0;
     while (!quit){
-        Uint32 new_ticks = SDL_GetTicks();
-        cout << new_ticks - last_ticks << endl;
-        last_ticks = new_ticks;
-
+        // Uint32 new_ticks = SDL_GetTicks();
+        // cout << new_ticks - last_ticks << endl;
+        // last_ticks = new_ticks;
         while (SDL_PollEvent(&e)){
             switch (e.type) {
                 case SDL_QUIT:
@@ -79,14 +82,7 @@ void Game::main_loop() {
         }
 
         dude.move();
-
-        // Uint32 time_before_step = SDL_GetTicks();
-        // grid.step();
-        Uint32 time_after_step_before_draw = SDL_GetTicks();
-        // cout << "Time to step: " << (time_after_step_before_draw - time_before_step) << endl;
         render(sdl->renderer);
-        Uint32 time_after_draw = SDL_GetTicks();
-        // cout << "Time to draw: " << (time_after_draw - time_after_step_before_draw) << endl;
     }
 }
 

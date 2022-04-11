@@ -12,6 +12,9 @@ public:
 
     // this is the wrong place for this
     SDL_Texture *dude_texture = NULL;
+
+    SDL_Texture *asteroid128_texture = NULL;
+    SDL_Texture *asteroid64_texture = NULL;
     SDL_Texture *asteroid32_texture = NULL;
     SDL_Texture *asteroid16_texture = NULL;
     SDL_Texture *asteroid8_texture = NULL;
