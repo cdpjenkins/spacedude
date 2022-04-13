@@ -17,6 +17,7 @@ Game::Game(SDLContext *sdl) {
     entities.push_back(new Asteroid(400, 400, -1.1, -1.2, sdl->asteroid32_texture));
     entities.push_back(new Asteroid(500, 500, -0.9, 2.7, sdl->asteroid64_texture));
     entities.push_back(new Asteroid(600, 600, 0.7001, 2.2, sdl->asteroid128_texture));
+    entities.push_back(new Asteroid(400, 600, 0.7001, 2.2, sdl->bullet_texture));
 }
 
 Game::~Game() {

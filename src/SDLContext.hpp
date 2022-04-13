@@ -18,6 +18,8 @@ public:
     SDL_Texture *asteroid32_texture = NULL;
     SDL_Texture *asteroid16_texture = NULL;
     SDL_Texture *asteroid8_texture = NULL;
+
+    SDL_Texture *bullet_texture = NULL;
     
     SDL_Renderer *renderer = NULL;
 

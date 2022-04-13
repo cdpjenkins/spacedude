@@ -54,6 +54,8 @@ SDLContext::SDLContext() {
     asteroid16_texture = IMG_LoadTexture(renderer, "assets/asteroid16.png");
     asteroid8_texture = IMG_LoadTexture(renderer, "assets/asteroid8.png");
 
+    bullet_texture = IMG_LoadTexture(renderer, "assets/bullet.png");
+
     SDL_UpdateWindowSurface(window);
 }
 
