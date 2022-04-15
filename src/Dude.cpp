@@ -14,8 +14,8 @@ Dude::Dude(float x, float y, float theta, SDL_Texture *texture) {
 
     this->texture = texture;
 
-    this->dx = 0;
-    this->dy = 0;
+    this->vx = 0;
+    this->vy = 0;
     this->acceleration = 0.01;
 }
 
@@ -24,8 +24,8 @@ void Dude::move() {
     const int WIDTH = 1280;
     const int HEIGHT = 800;
 
-    x += dx;
-    y += dy;
+    x += vx;
+    y += vy;
 
     if (x > WIDTH) x -= WIDTH;
     if (x < 0) x += WIDTH;
@@ -49,8 +49,8 @@ void Dude::draw(SDL_Renderer *renderer) {
 void Dude::accelerate_forwards() {
     Vector dir = direction();
 
-    dx += dir.x * acceleration;
-    dy -= dir.y * acceleration;
+    vx += dir.x * acceleration;
+    vy -= dir.y * acceleration;
 }
 
 Vector Dude::direction() {

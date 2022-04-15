@@ -7,10 +7,10 @@
 
 class Asteroid : public Entity {
 public:
-    float x;
-    float y;
-    float vx;
-    float vy;
+    // float x;
+    // float y;
+    // float vx;
+    // float vy;
     SDL_Texture *texture;
 
     Asteroid(float x, float y, float vx, float vy, SDL_Texture *texture);
