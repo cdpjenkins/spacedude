@@ -9,9 +9,7 @@
 
 class Dude : public Entity {
 public:
-    float theta;
     float acceleration = 0.01;
-    SDL_Texture *texture = NULL;
 
     Dude(float x, float y, float theta, SDL_Texture *texture);
 

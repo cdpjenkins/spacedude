@@ -8,14 +8,13 @@ using namespace std;
 const float g = 0.005;
 
 Dude::Dude(float x, float y, float theta, SDL_Texture *texture) {
-    this->x = x;
-    this->y = y;
+    this->position = Vector {.x = x, .y = y};
+    this->velocity = Vector {.x = 0, .y = 0};
+
     this->theta = theta;
 
     this->texture = texture;
 
-    this->vx = 0;
-    this->vy = 0;
     this->acceleration = 0.01;
 }
 
@@ -23,6 +22,8 @@ void Dude::draw(SDL_Renderer *renderer) {
     // TODO this is largely duplicated with the implementation in Asteroid right now
 
     int w, h;
+    float x = position.x;
+    float y = HEIGHT - position.y;
     SDL_Rect dest = {.x = static_cast<int>(x), .y = static_cast<int>(y)};
     
     dest.x -= (dest.w / 2);
@@ -34,9 +35,9 @@ void Dude::draw(SDL_Renderer *renderer) {
 
 void Dude::accelerate_forwards() {
     Vector dir = direction();
+    dir *= acceleration;
 
-    vx += dir.x * acceleration;
-    vy -= dir.y * acceleration;
+    velocity += dir;
 }
 
 Vector Dude::direction() {

@@ -5,8 +5,6 @@
 
 class Bullet : Entity {
 public:
-    void move();
-    void draw(SDL_Renderer *renderer);
 };
 
 #endif // BULLET_HPP

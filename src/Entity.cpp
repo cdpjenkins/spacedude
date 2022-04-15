@@ -1,15 +1,23 @@
 #include "Entity.hpp"
 
 void Entity::move() {
-    // this is the wrong place for this!
-    const int WIDTH = 1280;
-    const int HEIGHT = 800;
+    position += velocity;
 
-    x += vx;
-    y += vy;
+    if (position.x > WIDTH) position.x -= WIDTH;
+    if (position.x < 0) position.x += WIDTH;
+    if (position.y > HEIGHT) position.y -= HEIGHT;
+    if (position.y < 0) position.y += HEIGHT;
+}
 
-    if (x > WIDTH) x -= WIDTH;
-    if (x < 0) x += WIDTH;
-    if (y > HEIGHT) y -= HEIGHT;
-    if (y < 0) y += HEIGHT;
+void Entity::draw(SDL_Renderer *renderer) {
+    int w, h;
+    float x = position.x;
+    float y = HEIGHT - position.y;
+    SDL_Rect dest = {.x = static_cast<int>(x), .y = static_cast<int>(y)};
+    
+    dest.x -= (dest.w / 2);
+	dest.y -= (dest.h / 2);
+
+    SDL_QueryTexture(texture, NULL, NULL, &dest.w, &dest.h);
+	SDL_RenderCopyEx(renderer, texture, NULL, &dest, theta, NULL, SDL_FLIP_NONE);
 }
