@@ -5,6 +5,7 @@
 #include <SDL2/SDL.h>
 
 #include "Entity.hpp"
+#include "Vector.hpp"
 
 class Dude : public Entity {
 public:
@@ -21,6 +22,7 @@ public:
     void move();
     void draw(SDL_Renderer *renderer);
     void accelerate_forwards();
+    Vector direction();
 };
 
 #endif // DUDE_HPP

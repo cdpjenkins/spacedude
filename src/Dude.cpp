@@ -46,15 +46,18 @@ void Dude::draw(SDL_Renderer *renderer) {
 	SDL_RenderCopyEx(renderer, texture, NULL, &dest, theta, NULL, SDL_FLIP_NONE);
 }
 
-
 void Dude::accelerate_forwards() {
-    float radians = theta * M_PI / 180 ;
+    Vector dir = direction();
+
+    dx += dir.x * acceleration;
+    dy -= dir.y * acceleration;
+}
+
+Vector Dude::direction() {
+    float radians = theta * M_PI / 180;
 
     float dir_x = sin(radians);
     float dir_y = cos(radians);
 
-    // cout << dir_x << "," << dir_y << endl;
-
-    dx += dir_x * acceleration;
-    dy -= dir_y * acceleration;
+    return Vector {.x = dir_x, .y = dir_y};
 }
