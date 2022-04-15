@@ -11,7 +11,7 @@ public:
     float vy;
 
     virtual ~Entity() {}
-    virtual void move() = 0;
+    void move();
     virtual void draw(SDL_Renderer *renderer) = 0;
 };
 

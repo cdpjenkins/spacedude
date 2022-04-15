@@ -19,20 +19,6 @@ Dude::Dude(float x, float y, float theta, SDL_Texture *texture) {
     this->acceleration = 0.01;
 }
 
-void Dude::move() {
-    // this is the wrong place for this!
-    const int WIDTH = 1280;
-    const int HEIGHT = 800;
-
-    x += vx;
-    y += vy;
-
-    if (x > WIDTH) x -= WIDTH;
-    if (x < 0) x += WIDTH;
-    if (y > HEIGHT) y -= HEIGHT;
-    if (y < 0) y += HEIGHT;
-}
-
 void Dude::draw(SDL_Renderer *renderer) {
     // TODO this is largely duplicated with the implementation in Asteroid right now
 

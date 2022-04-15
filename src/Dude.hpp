@@ -15,7 +15,6 @@ public:
 
     Dude(float x, float y, float theta, SDL_Texture *texture);
 
-    void move();
     void draw(SDL_Renderer *renderer);
     void accelerate_forwards();
     Vector direction();
