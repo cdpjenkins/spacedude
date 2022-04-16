@@ -1,6 +1,6 @@
 ARCH=
 CXX=g++
-CXXFLAGS=$(ARCH) -std=c++11 `sdl2-config --cflags | sed -e 's/include\/SDL2/include/'`
+CXXFLAGS=$(ARCH) -std=c++11 `sdl2-config --cflags | sed -e 's/include\/SDL2/include/'` -framework OpenGL
 LDFLAGS=`sdl2-config --libs` -lSDL2_image
 SRCS=$(wildcard src/*.cpp)
 OBJS=$(SRCS:.cpp=.o)
