@@ -23,9 +23,11 @@ public:
     
     SDL_Renderer *renderer = NULL;
 
+    SDL_GLContext gContext;
+    SDL_Window *window = NULL;
+
 private:
     SDL_Joystick* joystick = NULL;
-    SDL_Window *window = NULL;
 };
 
 #endif // SDL_CONTEXT_HPP

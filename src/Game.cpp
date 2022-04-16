@@ -14,12 +14,12 @@ Game::Game(SDLContext *sdl) {
 
     dude = new Dude(600, 400, 0, sdl->dude_texture);
 
-    entities.push_back(new Asteroid(200, 200, 1.3, 0.46, sdl->asteroid8_texture));
-    entities.push_back(new Asteroid(300, 300, -0.42, -0.2, sdl->asteroid16_texture));
-    entities.push_back(new Asteroid(400, 400, -1.1, -1.2, sdl->asteroid32_texture));
-    entities.push_back(new Asteroid(500, 500, -0.9, 2.7, sdl->asteroid64_texture));
-    entities.push_back(new Asteroid(600, 600, 0.7001, 2.2, sdl->asteroid128_texture));
-    entities.push_back(new Asteroid(400, 600, 0.7001, 2.2, sdl->bullet_texture));
+    // entities.push_back(new Asteroid(200, 200, 1.3, 0.46, sdl->asteroid8_texture));
+    // entities.push_back(new Asteroid(300, 300, -0.42, -0.2, sdl->asteroid16_texture));
+    // entities.push_back(new Asteroid(400, 400, -1.1, -1.2, sdl->asteroid32_texture));
+    // entities.push_back(new Asteroid(500, 500, -0.9, 2.7, sdl->asteroid64_texture));
+    // entities.push_back(new Asteroid(600, 600, 0.7001, 2.2, sdl->asteroid128_texture));
+    // entities.push_back(new Asteroid(400, 600, 0.7001, 2.2, sdl->bullet_texture));
 }
 
 Game::~Game() {
@@ -106,14 +106,34 @@ void Game::main_loop() {
 }
 
 void Game::render(SDL_Renderer *renderer) {
-    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
-    SDL_RenderClear(renderer);
 
-    dude->draw(renderer);
-
-    for (auto& entity : entities) {
-        entity->draw(renderer);
+    //     //Clear color buffer
+    glClear(GL_COLOR_BUFFER_BIT);
+    GLenum error = glGetError();
+    if( error != GL_NO_ERROR ) {
+        printf( "Error initializing OpenGL! --->    %s<---\n", gluErrorString( error ) );
+        throw exception();
     }
 
-    SDL_RenderPresent(renderer);
+    glBegin( GL_TRIANGLES );
+        glColor3f( 0.f, 1.f, 1.f );
+        glVertex2f( -0.5f, -0.5f );
+        glVertex2f( 0.5f, -0.5f );
+        glVertex2f( 0.5f, 0.5f );
+        // glVertex2f( -0.5f, 0.5f );
+    glEnd();
+
+    error = glGetError();
+    if( error != GL_NO_ERROR ) {
+        printf( "Error initializing OpenGL! --->%s<---\n", gluErrorString( error ) );
+        throw exception();
+    }
+
+    SDL_GL_SwapWindow(sdl->window);
+
+    error = glGetError();
+    if( error != GL_NO_ERROR ) {
+        printf( "Error initializing OpenGL! --->%s<---\n", gluErrorString( error ) );
+        throw exception();
+    }
 }
