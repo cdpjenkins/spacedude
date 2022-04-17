@@ -21,21 +21,21 @@ Dude::Dude(float x, float y, float theta, SDL_Texture *texture) {
 void Dude::draw(SDL_Renderer *renderer) {
     // // TODO this is largely duplicated with the implementation in Asteroid right now
     Vector screen_position = position.to_screen_coords(HEIGHT);
+    Vector thang = position + direction() * 100;
+    Vector screen_thang = thang.to_screen_coords(HEIGHT);
 
     SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0xFF, 0xFF);
-    SDL_RenderDrawLineF(renderer, screen_position.x, screen_position.y, screen_position.x + 100, screen_position.y + 100);
-
+    SDL_RenderDrawLineF(renderer, screen_position.x, screen_position.y, screen_thang.x, screen_thang.y);
 
     SDL_FRect dest = {.x = screen_position.x, .y = screen_position.y};
-    
-    dest.x -= (dest.w / 2);
-	dest.y -= (dest.h / 2);
 
     int w, h;
 
     SDL_QueryTexture(texture, NULL, NULL, &w, &h);
     dest.w = w;
     dest.h = h;
+    dest.x -= (dest.w / 2);
+	dest.y -= (dest.h / 2);
 	SDL_RenderCopyExF(renderer, texture, NULL, &dest, theta, NULL, SDL_FLIP_NONE);
 }
 
