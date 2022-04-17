@@ -101,6 +101,16 @@ void Game::main_loop() {
             entity->move();
         }
 
+        // oh man this is so much more horrible than it needs to be
+        // all we want to do is remove !alive elements from the list
+        // TODO pull into a remove_dead_entities() function so at least
+        // we don't have to look at it...
+        entities.erase(
+            remove_if(entities.begin(), entities.end(),
+                [](Entity* entity) { return !(entity->alive); }),
+            entities.end()
+        );
+
         render(sdl->renderer);
     }
 }

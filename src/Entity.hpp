@@ -15,16 +15,18 @@ public:
     Vector position;
     float theta;
     Vector velocity;
+    bool alive;
 
     SDL_Texture *texture = NULL;
 
     Entity(Vector& position, Vector velocity) {
         this->position = position;
         this->velocity = velocity;
+        this->alive = true;
     }
 
     virtual ~Entity() {}
-    void move();
+    virtual void move();
     void draw(SDL_Renderer *renderer, SDLContext *sdl);
     virtual SDL_Texture *get_texture(SDLContext *sdl) = 0;
 };
