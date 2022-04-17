@@ -40,9 +40,6 @@ SDLContext::SDLContext() {
     if (window == NULL) {
         throw exception();
     }
-    // this doesn't work on Mac and I don't know why
-    SDL_RaiseWindow(window);
-    SDL_SetWindowInputFocus(window);
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
