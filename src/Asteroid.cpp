@@ -7,8 +7,8 @@
 using namespace std;
 
 Asteroid::Asteroid(float x, float y, float vx, float vy, SDL_Texture *texture) {
-    this->position = Vector {.x = x, .y = y};
-    this->velocity = Vector {.x = vx, .y = vy};
+    this->position = Vector(x, y);
+    this->velocity = Vector(vx, vy);
 
     this->theta = 0;
 

@@ -8,8 +8,8 @@ using namespace std;
 const float g = 0.005;
 
 Dude::Dude(float x, float y, float theta, SDL_Texture *texture) {
-    this->position = Vector {.x = x, .y = y};
-    this->velocity = Vector {.x = 0, .y = 0};
+    this->position = Vector(x, y);
+    this->velocity = Vector(0, 0);
 
     this->theta = theta;
 
@@ -52,5 +52,5 @@ Vector Dude::direction() {
     float dir_x = sin(radians);
     float dir_y = cos(radians);
 
-    return Vector {.x = dir_x, .y = dir_y};
+    return Vector(dir_x, dir_y);
 }
