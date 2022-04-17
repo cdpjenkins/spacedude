@@ -2,14 +2,14 @@
 #include <cmath>
 
 #include "Dude.hpp"
+#include "Bullet.hpp"
 
 using namespace std;
 
 const float g = 0.005;
 
-Dude::Dude(float x, float y, float theta, SDL_Texture *texture) {
-    this->position = Vector(x, y);
-    this->velocity = Vector(0, 0);
+Dude::Dude(Vector position, float theta, SDL_Texture *texture)
+    : Entity(position, Vector::ZERO()) {
 
     this->theta = theta;
 
@@ -18,7 +18,7 @@ Dude::Dude(float x, float y, float theta, SDL_Texture *texture) {
     this->acceleration = 0.01;
 }
 
-void Dude::draw(SDL_Renderer *renderer) {
+void Dude::draw(SDL_Renderer *renderer, SDLContext *sdl) {
     // // TODO this is largely duplicated with the implementation in Asteroid right now
     Vector screen_position = position.to_screen_coords(HEIGHT);
     Vector thang = position + direction() * 100;
@@ -39,6 +39,10 @@ void Dude::draw(SDL_Renderer *renderer) {
 	SDL_RenderCopyExF(renderer, texture, NULL, &dest, theta, NULL, SDL_FLIP_NONE);
 }
 
+SDL_Texture *Dude::get_texture(SDLContext *sdl) {
+    return sdl->dude_texture;
+}
+
 void Dude::accelerate_forwards() {
     Vector dir = direction();
     dir *= acceleration;
@@ -53,4 +57,11 @@ Vector Dude::direction() {
     float dir_y = cos(radians);
 
     return Vector(dir_x, dir_y);
+}
+
+Bullet *Dude::fire_new_bullet() {
+    Vector bullet_position = position;
+    Vector bullet_velocity = velocity + direction() * 5;
+
+    return new Bullet(bullet_position, bullet_velocity);
 }

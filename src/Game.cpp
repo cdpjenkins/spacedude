@@ -11,19 +11,19 @@ using namespace std;
 Game::Game(SDLContext *sdl) {
     this->sdl = sdl;
 
-    dude = new Dude(600, 400, 0, sdl->dude_texture);
+    dude = new Dude(Vector(600, 400), 0, sdl->dude_texture);
 
-    entities.push_back(new Asteroid(200, 200, 1.3, 0.46, sdl->asteroid8_texture));
-    entities.push_back(new Asteroid(300, 300, -0.42, -0.2, sdl->asteroid16_texture));
-    entities.push_back(new Asteroid(400, 400, -1.1, -1.2, sdl->asteroid32_texture));
-    entities.push_back(new Asteroid(500, 500, -0.9, 2.7, sdl->asteroid64_texture));
-    entities.push_back(new Asteroid(600, 600, 0.7001, 2.2, sdl->asteroid128_texture));
-    entities.push_back(new Asteroid(400, 600, 0.7001, 2.2, sdl->bullet_texture));
+    entities.push_back(new Asteroid(Vector(200, 200), Vector(1.3, 0.46), sdl->asteroid8_texture));
+    entities.push_back(new Asteroid(Vector(300, 300), Vector(-0.42, -0.2), sdl->asteroid16_texture));
+    entities.push_back(new Asteroid(Vector(400, 400), Vector(-1.1, -1.2), sdl->asteroid32_texture));
+    entities.push_back(new Asteroid(Vector(500, 500), Vector(-0.9, 2.7), sdl->asteroid64_texture));
+    entities.push_back(new Asteroid(Vector(600, 600), Vector(0.7001, 2.2), sdl->asteroid128_texture));
+    entities.push_back(new Asteroid(Vector(400, 600), Vector(0.7001, 2.2), sdl->bullet_texture));
 }
 
 Game::~Game() {
-    for (auto& asteroid : entities) {
-        delete asteroid;
+    for (auto& entity : entities) {
+        delete entity;
     }
 
     delete dude;
@@ -91,13 +91,14 @@ void Game::main_loop() {
         if (keys[SDL_SCANCODE_Q]) {
             quit = true;
         }
-        if (keys[SDL_SCANCODE_A]) {
-            // new Bullet();
+        if (keys[SDL_SCANCODE_F]) {
+            Bullet *new_bullet = dude->fire_new_bullet();
+            entities.push_back(new_bullet);
         }
 
         dude->move();
-        for (auto const& asteroid : entities) {
-            asteroid->move();
+        for (auto const& entity : entities) {
+            entity->move();
         }
 
         render(sdl->renderer);
@@ -108,15 +109,14 @@ void Game::render(SDL_Renderer *renderer) {
     SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
     SDL_RenderClear(renderer);
 
-    dude->draw(renderer);
-
+    dude->draw(renderer, sdl);
 
     SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0xFF, 0xFF);
     SDL_RenderDrawLine(renderer, 0, 0 , 500, 500);
 
 
     for (auto& entity : entities) {
-        entity->draw(renderer);
+        entity->draw(renderer, sdl);
     }
 
     SDL_RenderPresent(renderer);

@@ -6,12 +6,15 @@
 
 using namespace std;
 
-Asteroid::Asteroid(float x, float y, float vx, float vy, SDL_Texture *texture) {
-    this->position = Vector(x, y);
-    this->velocity = Vector(vx, vy);
+Asteroid::Asteroid(Vector position, Vector velocity, SDL_Texture *texture)
+    : Entity(position, velocity) {
 
     this->theta = 0;
 
     this->texture = texture;
 }
 
+
+SDL_Texture *Asteroid::get_texture(SDLContext *sdl) {
+    return sdl->asteroid64_texture;
+}

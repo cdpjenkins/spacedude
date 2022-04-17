@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 
+#include "SDLContext.hpp"
 #include "Vector.hpp"
 
 class Entity {
@@ -17,9 +18,15 @@ public:
 
     SDL_Texture *texture = NULL;
 
+    Entity(Vector& position, Vector velocity) {
+        this->position = position;
+        this->velocity = velocity;
+    }
+
     virtual ~Entity() {}
     void move();
-    void draw(SDL_Renderer *renderer);
+    void draw(SDL_Renderer *renderer, SDLContext *sdl);
+    virtual SDL_Texture *get_texture(SDLContext *sdl) = 0;
 };
 
 #endif // ENTITY_HPP

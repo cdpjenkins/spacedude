@@ -46,6 +46,10 @@ struct Vector {
     inline Vector to_screen_coords(float height) {
         return Vector(x, height - y);
     }
+
+    inline static Vector ZERO() {
+        return Vector(0, 0);
+    }
 };
 
 class Matrix {

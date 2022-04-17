@@ -3,8 +3,6 @@
 
 #include <SDL2/SDL.h>
 
-#include "Dude.hpp"
-
 class SDLContext {
 public:
     SDLContext();

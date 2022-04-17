@@ -3,8 +3,14 @@
 
 #include "Entity.hpp"
 
-class Bullet : Entity {
+class Bullet : public Entity {
 public:
+    Bullet(Vector& position, Vector& velocity)
+        : Entity(position, velocity) {
+            // meh
+        }
+
+    SDL_Texture *get_texture(SDLContext *sdl);
 };
 
 #endif // BULLET_HPP
