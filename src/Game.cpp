@@ -2,7 +2,6 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
-#include <GL/glu.h>
 
 #include "Game.hpp"
 #include "SDLContext.hpp"
@@ -110,6 +109,11 @@ void Game::render(SDL_Renderer *renderer) {
     SDL_RenderClear(renderer);
 
     dude->draw(renderer);
+
+
+    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0xFF, 0xFF);
+    SDL_RenderDrawLine(renderer, 0, 0 , 500, 500);
+
 
     for (auto& entity : entities) {
         entity->draw(renderer);

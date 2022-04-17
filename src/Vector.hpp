@@ -18,6 +18,14 @@ struct Vector {
         x *= factor;
         y *= factor;
     }
+
+    // probably not the best place to put this long run...
+    inline Vector to_screen_coords(float height) {
+        return Vector {
+            .x = x,
+            .y = height - y
+        };
+    }
 };
 
 #endif // VECTOR_HPP
