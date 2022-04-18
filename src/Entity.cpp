@@ -1,4 +1,8 @@
+#include <iostream>
+
 #include "Entity.hpp"
+
+using namespace std;
 
 vector<Entity *> Entity::update(vector<Entity *> all_entities) {
     position += velocity;
@@ -28,5 +32,5 @@ void Entity::draw(SDL_Renderer *renderer, SDLContext *sdl) {
 }
 
 SDL_Texture *Entity::get_texture(SDLContext *sdl) {
-    return sdl->textures[texture_id];
+    return sdl->sprites[sprite_id].texture;
 }

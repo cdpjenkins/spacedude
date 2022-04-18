@@ -16,15 +16,15 @@ public:
     float theta;
     Vector velocity;
     bool alive;
-    TextureID texture_id;
+    SpriteID sprite_id;
 
     SDL_Texture *texture = NULL;
 
-    Entity(Vector& position, Vector velocity, float theta, TextureID texture_id) {
+    Entity(Vector& position, Vector velocity, float theta, SpriteID sprite_id) {
         this->position = position;
         this->velocity = velocity;
         this->theta = theta;
-        this->texture_id = texture_id;
+        this->sprite_id = sprite_id;
 
         this->alive = true;
     }

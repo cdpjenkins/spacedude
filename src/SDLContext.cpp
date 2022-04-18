@@ -6,6 +6,8 @@
 
 #include "SDLContext.hpp"
 
+#include "Sprite.hpp"
+
 using namespace std;
 
 const int WIDTH = 1280;
@@ -43,23 +45,13 @@ SDLContext::SDLContext() {
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
-    dude_texture = IMG_LoadTexture(renderer, "assets/dude.png");
-
-    asteroid128_texture = IMG_LoadTexture(renderer, "assets/asteroid128.png");
-    asteroid64_texture = IMG_LoadTexture(renderer, "assets/asteroid64.png");
-    asteroid32_texture = IMG_LoadTexture(renderer, "assets/asteroid32.png");
-    asteroid16_texture = IMG_LoadTexture(renderer, "assets/asteroid16.png");
-    asteroid8_texture = IMG_LoadTexture(renderer, "assets/asteroid8.png");
-
-    bullet_texture = IMG_LoadTexture(renderer, "assets/bullet.png");
-
-    textures[DUDE_TEXTURE] = dude_texture;
-    textures[ASTEROID_128_TEXTURE] = asteroid128_texture;
-    textures[ASTEROID_64_TEXTURE] = asteroid64_texture;
-    textures[ASTEROID_32_TEXTURE] = asteroid32_texture;
-    textures[ASTEROID_16_TEXTURE] = asteroid16_texture;
-    textures[ASTEROID_8_TEXTURE] = asteroid8_texture;
-    textures[BULLET_TEXTURE] = bullet_texture;
+    sprites[DUDE] = Sprite::make_from_texture(renderer, "assets/dude.png", 16);
+    sprites[ASTEROID_128] = Sprite::make_from_texture(renderer, "assets/asteroid128.png", 64);
+    sprites[ASTEROID_64] = Sprite::make_from_texture(renderer, "assets/asteroid64.png", 32);
+    sprites[ASTEROID_32] = Sprite::make_from_texture(renderer, "assets/asteroid32.png", 16);
+    sprites[ASTEROID_16] = Sprite::make_from_texture(renderer, "assets/asteroid16.png", 8);
+    sprites[ASTEROID_8] = Sprite::make_from_texture(renderer, "assets/asteroid8.png", 4);
+    sprites[BULLET] = Sprite::make_from_texture(renderer, "assets/bullet.png", 2);
 
     SDL_UpdateWindowSurface(window);
 }

@@ -13,11 +13,11 @@ Game::Game(SDLContext *sdl) {
 
     dude = new Dude(Vector(600, 400), 0);
 
-    entities.push_back(new Asteroid(Vector(200, 200), Vector(1.3, 0.46), TextureID::ASTEROID_8_TEXTURE));
-    entities.push_back(new Asteroid(Vector(300, 300), Vector(-0.42, -0.2), TextureID::ASTEROID_16_TEXTURE));
-    entities.push_back(new Asteroid(Vector(400, 400), Vector(-1.1, -1.2), TextureID::ASTEROID_32_TEXTURE));
-    entities.push_back(new Asteroid(Vector(500, 500), Vector(-0.9, 2.7), TextureID::ASTEROID_64_TEXTURE));
-    entities.push_back(new Asteroid(Vector(600, 600), Vector(0.7001, 2.2), TextureID::ASTEROID_128_TEXTURE));
+    entities.push_back(new Asteroid(Vector(200, 200), Vector(1.3, 0.46), SpriteID::ASTEROID_8));
+    entities.push_back(new Asteroid(Vector(300, 300), Vector(-0.42, -0.2), SpriteID::ASTEROID_16));
+    entities.push_back(new Asteroid(Vector(400, 400), Vector(-1.1, -1.2), SpriteID::ASTEROID_32));
+    entities.push_back(new Asteroid(Vector(500, 500), Vector(-0.9, 2.7), SpriteID::ASTEROID_64));
+    entities.push_back(new Asteroid(Vector(600, 600), Vector(0.7001, 2.2), SpriteID::ASTEROID_128));
 }
 
 Game::~Game() {

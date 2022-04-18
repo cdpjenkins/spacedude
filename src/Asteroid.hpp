@@ -7,7 +7,7 @@
 
 class Asteroid : public Entity {
 public:
-    Asteroid(Vector position, Vector velocity, TextureID texture_id);
+    Asteroid(Vector position, Vector velocity, SpriteID sprite_id);
 
     vector<Entity *> bullet_hit();
 };

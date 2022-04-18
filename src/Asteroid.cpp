@@ -6,8 +6,8 @@
 
 using namespace std;
 
-Asteroid::Asteroid(Vector position, Vector velocity, TextureID texture_id)
-    : Entity(position, velocity, 0, texture_id) {}
+Asteroid::Asteroid(Vector position, Vector velocity, SpriteID sprite_id)
+    : Entity(position, velocity, 0, sprite_id) {}
 
 vector<Entity *> Asteroid::bullet_hit() {
     this->alive = false;

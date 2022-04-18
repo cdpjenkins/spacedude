@@ -9,7 +9,7 @@ using namespace std;
 const float g = 0.005;
 
 Dude::Dude(Vector position, float theta)
-    : Entity(position, Vector::ZERO(), theta, TextureID::DUDE_TEXTURE) {
+    : Entity(position, Vector::ZERO(), theta, SpriteID::DUDE) {
     this->acceleration = 0.01;
 }
 
@@ -17,7 +17,6 @@ void Dude::draw(SDL_Renderer *renderer, SDLContext *sdl) {
     // // TODO this is largely duplicated with the implementation in Asteroid right now
     Vector screen_position = position.to_screen_coords(HEIGHT);
     Vector thang = position + direction() * 100;
-    Vector screen_thang = thang.to_screen_coords(HEIGHT);
 
     SDL_FRect dest = {.x = screen_position.x, .y = screen_position.y};
 

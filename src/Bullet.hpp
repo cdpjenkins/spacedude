@@ -8,7 +8,7 @@ public:
     int lifetime = 100;
 
     Bullet(Vector& position, Vector& velocity)
-        : Entity(position, velocity, 0, TextureID::BULLET_TEXTURE) {}
+        : Entity(position, velocity, 0, SpriteID::BULLET) {}
 
     SDL_Texture *get_texture(SDLContext *sdl);
     vector<Entity *> update(vector<Entity *> all_entities);
