@@ -33,6 +33,7 @@ public:
     virtual vector<Entity *> update(vector<Entity *> all_entities);
     void draw(SDL_Renderer *renderer, SDLContext *sdl);
     SDL_Texture *get_texture(SDLContext *sdl);
+    virtual vector<Entity *> bullet_hit() { return vector<Entity *>(); };
 };
 
 #endif // ENTITY_HPP

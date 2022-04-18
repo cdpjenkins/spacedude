@@ -8,6 +8,8 @@
 class Asteroid : public Entity {
 public:
     Asteroid(Vector position, Vector velocity, TextureID texture_id);
+
+    vector<Entity *> bullet_hit();
 };
 
 #endif //  ASTEROID_HPP

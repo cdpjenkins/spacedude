@@ -50,6 +50,12 @@ struct Vector {
     inline static Vector ZERO() {
         return Vector(0, 0);
     }
+
+    inline float distance_to(Vector& that) {
+        float x_dist = this->x - that.x;
+        float y_dist = this->y - that.y;
+        return sqrtf(x_dist*x_dist + y_dist*y_dist);
+    }
 };
 
 class Matrix {

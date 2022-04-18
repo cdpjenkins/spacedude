@@ -19,9 +19,6 @@ void Dude::draw(SDL_Renderer *renderer, SDLContext *sdl) {
     Vector thang = position + direction() * 100;
     Vector screen_thang = thang.to_screen_coords(HEIGHT);
 
-    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0xFF, 0xFF);
-    SDL_RenderDrawLineF(renderer, screen_position.x, screen_position.y, screen_thang.x, screen_thang.y);
-
     SDL_FRect dest = {.x = screen_position.x, .y = screen_position.y};
 
     int w, h;

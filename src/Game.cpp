@@ -121,10 +121,6 @@ void Game::render(SDL_Renderer *renderer) {
 
     dude->draw(renderer, sdl);
 
-    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0xFF, 0xFF);
-    SDL_RenderDrawLine(renderer, 0, 0 , 500, 500);
-
-
     for (auto& entity : entities) {
         entity->draw(renderer, sdl);
     }
