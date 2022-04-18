@@ -1,6 +1,6 @@
 #include "Entity.hpp"
 
-vector<Entity *> Entity::update() {
+vector<Entity *> Entity::update(vector<Entity *> all_entities) {
     position += velocity;
 
     if (position.x > WIDTH) position.x -= WIDTH;

@@ -30,7 +30,7 @@ public:
     }
 
     virtual ~Entity() {}
-    virtual vector<Entity *> update();
+    virtual vector<Entity *> update(vector<Entity *> all_entities);
     void draw(SDL_Renderer *renderer, SDLContext *sdl);
     SDL_Texture *get_texture(SDLContext *sdl);
 };

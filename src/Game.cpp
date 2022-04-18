@@ -95,9 +95,9 @@ void Game::main_loop() {
             entities.push_back(new_bullet);
         }
 
-        dude->update();
+        dude->update(entities);
         for (auto const& entity : entities) {
-            vector<Entity *> new_entities = entity->update();
+            vector<Entity *> new_entities = entity->update(entities);
             entities.insert(entities.end(), new_entities.begin(), new_entities.end());
         }
 
