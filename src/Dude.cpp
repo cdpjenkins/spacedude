@@ -61,7 +61,7 @@ Bullet *Dude::fire_new_bullet() {
         Vector bullet_position = position;
         Vector bullet_velocity = velocity + direction() * 5;
 
-        gun_energy -= 20;
+        gun_energy -= 0;
 
         return new Bullet(bullet_position, bullet_velocity);
     } else {

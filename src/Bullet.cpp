@@ -24,8 +24,9 @@ vector<Entity *> Bullet::update(vector<Entity *> all_entities) {
                     float distance = this->position.distance_to(asteroid->position);
 
                     if (distance < sprites[this->sprite_id].collision_radius + sprites[asteroid->sprite_id].collision_radius) {
-                        asteroid->bullet_hit();
+                        vector<Entity *> new_asteroids = asteroid->bullet_hit();
                         this->alive = false;
+                        return new_asteroids;
                     }
                 }
             }
