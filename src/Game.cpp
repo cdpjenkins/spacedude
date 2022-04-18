@@ -11,7 +11,7 @@ using namespace std;
 Game::Game(SDLContext *sdl) {
     this->sdl = sdl;
 
-    dude = new Dude(Vector(600, 400), 0, sdl->dude_texture);
+    dude = new Dude(Vector(600, 400), 0);
 
     entities.push_back(new Asteroid(Vector(200, 200), Vector(1.3, 0.46), TextureID::ASTEROID_8_TEXTURE));
     entities.push_back(new Asteroid(Vector(300, 300), Vector(-0.42, -0.2), TextureID::ASTEROID_16_TEXTURE));

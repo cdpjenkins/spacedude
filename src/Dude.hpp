@@ -13,13 +13,12 @@ class Dude : public Entity {
 public:
     float acceleration = 0.01;
 
-    Dude(Vector position, float theta, SDL_Texture *texture);
+    Dude(Vector position, float theta);
 
     void draw(SDL_Renderer *renderer, SDLContext *sdl);
     void accelerate_forwards();
     Vector direction();
     Bullet *fire_new_bullet();
-    SDL_Texture *get_texture(SDLContext *sdl);
 };
 
 #endif // DUDE_HPP

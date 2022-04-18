@@ -20,11 +20,13 @@ public:
 
     SDL_Texture *texture = NULL;
 
-    Entity(Vector& position, Vector velocity, TextureID texture_id) {
+    Entity(Vector& position, Vector velocity, float theta, TextureID texture_id) {
         this->position = position;
         this->velocity = velocity;
-        this->alive = true;
+        this->theta = theta;
         this->texture_id = texture_id;
+
+        this->alive = true;
     }
 
     virtual ~Entity() {}

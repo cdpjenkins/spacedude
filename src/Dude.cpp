@@ -8,13 +8,8 @@ using namespace std;
 
 const float g = 0.005;
 
-Dude::Dude(Vector position, float theta, SDL_Texture *texture)
-    : Entity(position, Vector::ZERO(), TextureID::DUDE_TEXTURE) {
-
-    this->theta = theta;
-
-    this->texture = texture;
-
+Dude::Dude(Vector position, float theta)
+    : Entity(position, Vector::ZERO(), theta, TextureID::DUDE_TEXTURE) {
     this->acceleration = 0.01;
 }
 
@@ -31,16 +26,12 @@ void Dude::draw(SDL_Renderer *renderer, SDLContext *sdl) {
 
     int w, h;
 
-    SDL_QueryTexture(texture, NULL, NULL, &w, &h);
+    SDL_QueryTexture(get_texture(sdl), NULL, NULL, &w, &h);
     dest.w = w;
     dest.h = h;
     dest.x -= (dest.w / 2);
 	dest.y -= (dest.h / 2);
-	SDL_RenderCopyExF(renderer, texture, NULL, &dest, theta, NULL, SDL_FLIP_NONE);
-}
-
-SDL_Texture *Dude::get_texture(SDLContext *sdl) {
-    return sdl->dude_texture;
+	SDL_RenderCopyExF(renderer, get_texture(sdl), NULL, &dest, theta, NULL, SDL_FLIP_NONE);
 }
 
 void Dude::accelerate_forwards() {

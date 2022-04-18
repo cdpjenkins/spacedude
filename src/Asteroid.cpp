@@ -7,8 +7,5 @@
 using namespace std;
 
 Asteroid::Asteroid(Vector position, Vector velocity, TextureID texture_id)
-    : Entity(position, velocity, texture_id) {
-
-    this->theta = 0;
-}
+    : Entity(position, velocity, 0, texture_id) {}
 
