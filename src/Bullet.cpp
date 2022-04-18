@@ -8,11 +8,13 @@ SDL_Texture *Bullet::get_texture(SDLContext *sdl) {
     return sdl->bullet_texture;
 }
 
-void Bullet::move() {
-    Entity::move();
+vector<Entity *> Bullet::update() {
+    Entity::update();
 
     lifetime -= 1;
     if (lifetime <= 0) {
         alive = false;
     }
+
+    return vector<Entity *>();
 }

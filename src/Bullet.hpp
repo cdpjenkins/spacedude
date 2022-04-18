@@ -11,7 +11,7 @@ public:
         : Entity(position, velocity, 0, TextureID::BULLET_TEXTURE) {}
 
     SDL_Texture *get_texture(SDLContext *sdl);
-    void move();
+    vector<Entity *> update();
 };
 
 #endif // BULLET_HPP

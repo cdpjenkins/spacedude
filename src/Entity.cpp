@@ -1,12 +1,14 @@
 #include "Entity.hpp"
 
-void Entity::move() {
+vector<Entity *> Entity::update() {
     position += velocity;
 
     if (position.x > WIDTH) position.x -= WIDTH;
     if (position.x < 0) position.x += WIDTH;
     if (position.y > HEIGHT) position.y -= HEIGHT;
     if (position.y < 0) position.y += HEIGHT;
+
+    return vector<Entity *>();
 }
 
 void Entity::draw(SDL_Renderer *renderer, SDLContext *sdl) {

@@ -95,9 +95,10 @@ void Game::main_loop() {
             entities.push_back(new_bullet);
         }
 
-        dude->move();
+        dude->update();
         for (auto const& entity : entities) {
-            entity->move();
+            vector<Entity *> new_entities = entity->update();
+            entities.insert(entities.end(), new_entities.begin(), new_entities.end());
         }
 
         // oh man this is so much more horrible than it needs to be
