@@ -32,5 +32,5 @@ void Entity::draw(SDL_Renderer *renderer, SDLContext *sdl) {
 }
 
 SDL_Texture *Entity::get_texture(SDLContext *sdl) {
-    return sdl->sprites[sprite_id].texture;
+    return sdl->textures[sprite_id];
 }

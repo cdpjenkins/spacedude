@@ -6,16 +6,17 @@
 
 using namespace std;
 
-Sprite::Sprite(float collision_radius, SDL_Texture *texture) {
+Sprite sprites[] = {
+    Sprite(DUDE, 16),
+    Sprite(ASTEROID_128, 40),
+    Sprite(ASTEROID_64, 20),
+    Sprite(ASTEROID_32, 10),
+    Sprite(ASTEROID_16, 5),
+    Sprite(ASTEROID_8, 3),
+    Sprite(BULLET, 2)
+};
+
+Sprite::Sprite(SpriteID id, float collision_radius) {
+    this->id = id;
     this->collision_radius = collision_radius;
-    this->texture = texture;
-}
-
-Sprite Sprite::make_from_texture(SDL_Renderer *renderer, const char *texture_filename, float collision_radius) {
-    SDL_Texture *texture = IMG_LoadTexture(renderer, texture_filename);
-    if (texture == NULL) {
-        throw exception();
-    }
-
-    return Sprite(collision_radius, texture);
 }

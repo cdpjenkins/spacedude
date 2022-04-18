@@ -13,6 +13,14 @@ using namespace std;
 const int WIDTH = 1280;
 const int HEIGHT = 800;
 
+SDL_Texture *load_texture(SDL_Renderer *renderer, const char *texture_filename) {
+    SDL_Texture *texture = IMG_LoadTexture(renderer, texture_filename);
+    if (texture == NULL) {
+        throw exception();
+    }
+    return texture;
+}
+
 SDLContext::SDLContext() {
     int rc = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK);
     if (rc != 0) {
@@ -45,13 +53,14 @@ SDLContext::SDLContext() {
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
-    sprites[DUDE] = Sprite::make_from_texture(renderer, "assets/dude.png", 16);
-    sprites[ASTEROID_128] = Sprite::make_from_texture(renderer, "assets/asteroid128.png", 64);
-    sprites[ASTEROID_64] = Sprite::make_from_texture(renderer, "assets/asteroid64.png", 32);
-    sprites[ASTEROID_32] = Sprite::make_from_texture(renderer, "assets/asteroid32.png", 16);
-    sprites[ASTEROID_16] = Sprite::make_from_texture(renderer, "assets/asteroid16.png", 8);
-    sprites[ASTEROID_8] = Sprite::make_from_texture(renderer, "assets/asteroid8.png", 4);
-    sprites[BULLET] = Sprite::make_from_texture(renderer, "assets/bullet.png", 2);
+    textures[DUDE] = load_texture(renderer, "assets/dude.png");
+    textures[ASTEROID_128] = load_texture(renderer, "assets/asteroid128.png");
+    textures[ASTEROID_64] = load_texture(renderer, "assets/asteroid64.png");
+    textures[ASTEROID_32] = load_texture(renderer, "assets/asteroid32.png");
+    textures[ASTEROID_16] = load_texture(renderer, "assets/asteroid16.png");
+    textures[ASTEROID_8] = load_texture(renderer, "assets/asteroid8.png");
+    textures[BULLET] = load_texture(renderer, "assets/bullet.png");
+
 
     SDL_UpdateWindowSurface(window);
 }

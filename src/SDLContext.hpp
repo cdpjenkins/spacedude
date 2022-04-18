@@ -9,17 +9,6 @@
 
 using namespace std;
 
-enum SpriteID {
-    DUDE,
-    ASTEROID_128,
-    ASTEROID_64,
-    ASTEROID_32,
-    ASTEROID_16,
-    ASTEROID_8,
-    BULLET,
-    NUM_SPRITES
-};
-
 class SDLContext {
 public:
     SDLContext();
@@ -27,7 +16,7 @@ public:
     
     SDL_Renderer *renderer = NULL;
 
-    Sprite sprites[NUM_SPRITES];
+    SDL_Texture *textures[NUM_SPRITES];
 
 private:
     SDL_Joystick* joystick = NULL;

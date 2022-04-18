@@ -6,7 +6,7 @@
 using namespace std;
 
 SDL_Texture *Bullet::get_texture(SDLContext *sdl) {
-    return sdl->sprites[BULLET].texture;
+    return sdl->textures[BULLET];
 }
 
 vector<Entity *> Bullet::update(vector<Entity *> all_entities) {
@@ -23,7 +23,7 @@ vector<Entity *> Bullet::update(vector<Entity *> all_entities) {
 
                     float distance = this->position.distance_to(asteroid->position);
 
-                    if (distance < 50) {
+                    if (distance < sprites[this->sprite_id].collision_radius + sprites[asteroid->sprite_id].collision_radius) {
                         asteroid->bullet_hit();
                         this->alive = false;
                     }
