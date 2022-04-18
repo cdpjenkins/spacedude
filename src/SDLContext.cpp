@@ -53,6 +53,14 @@ SDLContext::SDLContext() {
 
     bullet_texture = IMG_LoadTexture(renderer, "assets/bullet.png");
 
+    textures[DUDE_TEXTURE] = dude_texture;
+    textures[ASTEROID_128_TEXTURE] = asteroid128_texture;
+    textures[ASTEROID_64_TEXTURE] = asteroid64_texture;
+    textures[ASTEROID_32_TEXTURE] = asteroid32_texture;
+    textures[ASTEROID_16_TEXTURE] = asteroid16_texture;
+    textures[ASTEROID_8_TEXTURE] = asteroid8_texture;
+    textures[BULLET_TEXTURE] = bullet_texture;
+
     SDL_UpdateWindowSurface(window);
 }
 

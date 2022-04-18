@@ -9,7 +9,7 @@ using namespace std;
 const float g = 0.005;
 
 Dude::Dude(Vector position, float theta, SDL_Texture *texture)
-    : Entity(position, Vector::ZERO()) {
+    : Entity(position, Vector::ZERO(), TextureID::DUDE_TEXTURE) {
 
     this->theta = theta;
 

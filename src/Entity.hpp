@@ -16,19 +16,21 @@ public:
     float theta;
     Vector velocity;
     bool alive;
+    TextureID texture_id;
 
     SDL_Texture *texture = NULL;
 
-    Entity(Vector& position, Vector velocity) {
+    Entity(Vector& position, Vector velocity, TextureID texture_id) {
         this->position = position;
         this->velocity = velocity;
         this->alive = true;
+        this->texture_id = texture_id;
     }
 
     virtual ~Entity() {}
     virtual void move();
     void draw(SDL_Renderer *renderer, SDLContext *sdl);
-    virtual SDL_Texture *get_texture(SDLContext *sdl) = 0;
+    SDL_Texture *get_texture(SDLContext *sdl);
 };
 
 #endif // ENTITY_HPP

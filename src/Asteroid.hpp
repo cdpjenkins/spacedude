@@ -7,9 +7,7 @@
 
 class Asteroid : public Entity {
 public:
-    Asteroid(Vector position, Vector velocity, SDL_Texture *texture);
-
-    SDL_Texture *get_texture(SDLContext *sdl);
+    Asteroid(Vector position, Vector velocity, TextureID texture_id);
 };
 
 #endif //  ASTEROID_HPP

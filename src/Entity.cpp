@@ -24,3 +24,7 @@ void Entity::draw(SDL_Renderer *renderer, SDLContext *sdl) {
 
 	SDL_RenderCopyEx(renderer, texture, NULL, &dest, theta, NULL, SDL_FLIP_NONE);
 }
+
+SDL_Texture *Entity::get_texture(SDLContext *sdl) {
+    return sdl->textures[texture_id];
+}

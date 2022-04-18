@@ -8,7 +8,7 @@ public:
     int lifetime = 100;
 
     Bullet(Vector& position, Vector& velocity)
-        : Entity(position, velocity) {
+        : Entity(position, velocity, TextureID::BULLET_TEXTURE) {
             // meh
         }
 
