@@ -92,7 +92,9 @@ void Game::main_loop() {
         }
         if (keys[SDL_SCANCODE_F]) {
             Bullet *new_bullet = dude->fire_new_bullet();
-            entities.push_back(new_bullet);
+            if (new_bullet) {
+                entities.push_back(new_bullet);
+            }
         }
 
         dude->update(entities);

@@ -15,10 +15,14 @@ public:
 
     Dude(Vector position, float theta);
 
+    vector<Entity *> update(vector<Entity *> all_entities);
     void draw(SDL_Renderer *renderer, SDLContext *sdl);
     void accelerate_forwards();
     Vector direction();
     Bullet *fire_new_bullet();
+
+private:
+    int gun_energy = 0;
 };
 
 #endif // DUDE_HPP

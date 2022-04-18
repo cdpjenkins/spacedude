@@ -13,6 +13,16 @@ Dude::Dude(Vector position, float theta)
     this->acceleration = 0.01;
 }
 
+vector<Entity *> Dude::update(vector<Entity *> all_entities) {
+    Entity::update(all_entities);
+
+    if (gun_energy < 0) {
+        gun_energy++;
+    }
+
+    return vector<Entity *>();
+}
+
 void Dude::draw(SDL_Renderer *renderer, SDLContext *sdl) {
     // // TODO this is largely duplicated with the implementation in Asteroid right now
     Vector screen_position = position.to_screen_coords(HEIGHT);
@@ -47,8 +57,14 @@ Vector Dude::direction() {
 }
 
 Bullet *Dude::fire_new_bullet() {
-    Vector bullet_position = position;
-    Vector bullet_velocity = velocity + direction() * 5;
+    if (gun_energy >= 0) {
+        Vector bullet_position = position;
+        Vector bullet_velocity = velocity + direction() * 5;
 
-    return new Bullet(bullet_position, bullet_velocity);
+        gun_energy -= 20;
+
+        return new Bullet(bullet_position, bullet_velocity);
+    } else {
+        return NULL;
+    }
 }
