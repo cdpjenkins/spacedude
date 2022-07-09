@@ -1,7 +1,7 @@
 #ifndef ASTEROID_HPP
 #define ASTEROID_HPP
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 #include "Entity.hpp"
 

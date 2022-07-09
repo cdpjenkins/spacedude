@@ -1,7 +1,7 @@
 #ifndef ENTITY_HPP
 #define ENTITY_HPP
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 #include "SDLContext.hpp"
 #include "Vector.hpp"
