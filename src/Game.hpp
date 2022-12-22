@@ -1,7 +1,7 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include <vector>
+#include <list>
 
 #include "Dude.hpp"
 #include "Asteroid.hpp"
@@ -16,7 +16,7 @@ public:
     ~Game();
 
     Dude *dude = NULL;
-    vector<Entity*> entities = vector<Entity*>();
+    list<Entity*> entities = list<Entity*>();
 
     void main_loop();
     void render(SDL_Renderer *renderer);

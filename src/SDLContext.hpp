@@ -1,7 +1,7 @@
 #ifndef SDL_CONTEXT_HPP
 #define SDL_CONTEXT_HPP
 
-#include <vector>
+#include <list>
 
 #include <SDL.h>
 

@@ -9,7 +9,7 @@ class Asteroid : public Entity {
 public:
     Asteroid(Vector position, Vector velocity, SpriteID sprite_id);
 
-    vector<Entity *> bullet_hit();
+    list<Entity *> bullet_hit();
 };
 
 #endif //  ASTEROID_HPP
