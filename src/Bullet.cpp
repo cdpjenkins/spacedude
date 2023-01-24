@@ -9,7 +9,7 @@ SDL_Texture *Bullet::get_texture(SDLContext *sdl) {
     return sdl->textures[BULLET];
 }
 
-list<Entity *> Bullet::update(list<Entity *> all_entities) {
+vector<Entity *> Bullet::update(vector<Entity *> all_entities) {
     Entity::update(all_entities);
 
     lifetime -= 1;
@@ -24,7 +24,7 @@ list<Entity *> Bullet::update(list<Entity *> all_entities) {
                     float distance = this->position.distance_to(asteroid->position);
 
                     if (distance < sprites[this->sprite_id].collision_radius + sprites[asteroid->sprite_id].collision_radius) {
-                        list<Entity *> new_asteroids = asteroid->bullet_hit();
+                        vector<Entity *> new_asteroids = asteroid->bullet_hit();
                         this->alive = false;
                         return new_asteroids;
                     }
@@ -33,5 +33,5 @@ list<Entity *> Bullet::update(list<Entity *> all_entities) {
         }
     }
 
-    return list<Entity *>();
+    return vector<Entity *>();
 }

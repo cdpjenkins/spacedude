@@ -13,14 +13,14 @@ Dude::Dude(Vector position, float theta)
     this->acceleration = 0.01;
 }
 
-list<Entity *> Dude::update(list<Entity *> all_entities) {
+vector<Entity *> Dude::update(vector<Entity *> all_entities) {
     Entity::update(all_entities);
 
     if (gun_energy < 0) {
         gun_energy++;
     }
 
-    return list<Entity *>();
+    return vector<Entity *>();
 }
 
 void Dude::draw(SDL_Renderer *renderer, SDLContext *sdl) {

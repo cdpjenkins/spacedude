@@ -30,10 +30,10 @@ public:
     }
 
     virtual ~Entity() {}
-    virtual list<Entity *> update(list<Entity *> all_entities);
+    virtual vector<Entity *> update(vector<Entity *> all_entities);
     void draw(SDL_Renderer *renderer, SDLContext *sdl);
     SDL_Texture *get_texture(SDLContext *sdl);
-    virtual list<Entity *> bullet_hit() { return list<Entity *>(); };
+    virtual vector<Entity *> bullet_hit() { return vector<Entity *>(); };
 };
 
 #endif // ENTITY_HPP

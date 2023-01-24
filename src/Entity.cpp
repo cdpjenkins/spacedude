@@ -4,7 +4,7 @@
 
 using namespace std;
 
-list<Entity *> Entity::update(list<Entity *> all_entities) {
+vector<Entity *> Entity::update(vector<Entity *> all_entities) {
     position += velocity;
 
     if (position.x > WIDTH) position.x -= WIDTH;
@@ -12,7 +12,7 @@ list<Entity *> Entity::update(list<Entity *> all_entities) {
     if (position.y > HEIGHT) position.y -= HEIGHT;
     if (position.y < 0) position.y += HEIGHT;
 
-    return list<Entity *>();
+    return vector<Entity *>();
 }
 
 void Entity::draw(SDL_Renderer *renderer, SDLContext *sdl) {

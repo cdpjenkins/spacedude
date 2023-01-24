@@ -36,9 +36,10 @@ void Game::main_loop() {
     bool quit = false;
     Uint32 last_ticks = 0;
     while (!quit){
-        // Uint32 new_ticks = SDL_GetTicks();
-        // cout << new_ticks - last_ticks << endl;
-        // last_ticks = new_ticks;
+        Uint32 new_ticks = SDL_GetTicks();
+        cout << new_ticks - last_ticks << endl;
+        last_ticks = new_ticks;
+
         while (SDL_PollEvent(&e)){
             switch (e.type) {
                 case SDL_QUIT:
@@ -99,7 +100,7 @@ void Game::main_loop() {
 
         dude->update(entities);
         for (auto const& entity : entities) {
-            list<Entity *> new_entities = entity->update(entities);
+            vector<Entity *> new_entities = entity->update(entities);
             entities.insert(entities.end(), new_entities.begin(), new_entities.end());
         }
 
@@ -107,6 +108,8 @@ void Game::main_loop() {
         // all we want to do is remove !alive elements from the list
         // TODO pull into a remove_dead_entities() function so at least
         // we don't have to look at it...
+        //
+        // Also this leaks memory because none of the objects we remove get deleted again. Sigh.s
         entities.erase(
             remove_if(entities.begin(), entities.end(),
                 [](Entity* entity) { return !(entity->alive); }),
