@@ -1,6 +1,9 @@
 #ifndef ENTITY_HPP
 #define ENTITY_HPP
 
+#include <list>
+using namespace std;
+
 #include <SDL.h>
 
 #include "SDLContext.hpp"
@@ -30,10 +33,10 @@ public:
     }
 
     virtual ~Entity() {}
-    virtual vector<Entity *> update(vector<Entity *> &all_entities);
+    virtual list<Entity *> update(list<Entity *> &all_entities);
     void draw(SDL_Renderer *renderer, SDLContext *sdl);
     SDL_Texture *get_texture(SDLContext *sdl);
-    virtual vector<Entity *> bullet_hit() { return vector<Entity *>(); };
+    virtual list<Entity *> bullet_hit() { return list<Entity *>(); };
 };
 
 #endif // ENTITY_HPP

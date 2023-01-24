@@ -1,5 +1,8 @@
 #include <iostream>
 #include <cmath>
+#include <list>
+
+using namespace std;
 
 #include "Dude.hpp"
 #include "Bullet.hpp"
@@ -13,14 +16,14 @@ Dude::Dude(Vector position, float theta)
     this->acceleration = 0.01;
 }
 
-vector<Entity *> Dude::update(vector<Entity *> &all_entities) {
+list<Entity *> Dude::update(list<Entity *> &all_entities) {
     Entity::update(all_entities);
 
     if (gun_energy < 0) {
         gun_energy++;
     }
 
-    return vector<Entity *>();
+    return {};
 }
 
 void Dude::draw(SDL_Renderer *renderer, SDLContext *sdl) {

@@ -1,10 +1,11 @@
 #include <iostream>
+#include <list>
 
 #include "Entity.hpp"
 
 using namespace std;
 
-vector<Entity *> Entity::update(vector<Entity *> &all_entities) {
+list<Entity *> Entity::update(list<Entity *> &all_entities) {
     position += velocity;
 
     if (position.x > WIDTH) position.x -= WIDTH;
@@ -12,7 +13,7 @@ vector<Entity *> Entity::update(vector<Entity *> &all_entities) {
     if (position.y > HEIGHT) position.y -= HEIGHT;
     if (position.y < 0) position.y += HEIGHT;
 
-    return vector<Entity *>();
+    return {};
 }
 
 void Entity::draw(SDL_Renderer *renderer, SDLContext *sdl) {

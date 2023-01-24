@@ -1,6 +1,9 @@
 #ifndef BULLET_HPP
 #define BULLET_HPP
 
+#include <list>
+using namespace std;
+
 #include "Entity.hpp"
 
 class Bullet : public Entity {
@@ -11,7 +14,7 @@ public:
         : Entity(position, velocity, 0, SpriteID::BULLET) {}
 
     SDL_Texture *get_texture(SDLContext *sdl);
-    vector<Entity *> update(vector<Entity *> &all_entities);
+    list<Entity *> update(list<Entity *> &all_entities);
 };
 
 #endif // BULLET_HPP
