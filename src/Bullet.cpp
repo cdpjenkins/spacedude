@@ -9,7 +9,7 @@ SDL_Texture *Bullet::get_texture(SDLContext *sdl) {
     return sdl->textures[BULLET];
 }
 
-vector<Entity *> Bullet::update(vector<Entity *> all_entities) {
+vector<Entity *> Bullet::update(vector<Entity *> &all_entities) {
     Entity::update(all_entities);
 
     lifetime -= 1;
