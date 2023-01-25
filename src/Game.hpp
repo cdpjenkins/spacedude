@@ -15,7 +15,7 @@ public:
     Game(SDLContext *sdl);
     ~Game();
 
-    Dude *dude = NULL;
+    unique_ptr<Dude> dude = {};
     list<unique_ptr<Entity>> entities = {};
 
     void main_loop();

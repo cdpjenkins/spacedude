@@ -7,11 +7,11 @@
 
 using namespace std;
 
-Game::Game(SDLContext *sdl) {
-    this->sdl = sdl;
+Game::Game(SDLContext *sdl) :
+    sdl(sdl),
+    dude(make_unique<Dude>(Vector(600, 400), 0))
 
-    dude = new Dude(Vector(600, 400), 0);
-
+{
     entities.push_back(make_unique<Asteroid>(Vector(200, 200), Vector(1.3, 0.46), SpriteID::ASTEROID_128));
     entities.push_back(make_unique<Asteroid>(Vector(300, 300), Vector(-0.42, -0.2), SpriteID::ASTEROID_128));
     entities.push_back(make_unique<Asteroid>(Vector(400, 400), Vector(-1.1, -1.2), SpriteID::ASTEROID_128));
@@ -19,9 +19,7 @@ Game::Game(SDLContext *sdl) {
     entities.push_back(make_unique<Asteroid>(Vector(600, 600), Vector(0.7001, 2.2), SpriteID::ASTEROID_128));
 }
 
-Game::~Game() {
-    delete dude;
-}
+Game::~Game() {}
 
 void Game::main_loop() {
     bool keys[SDL_NUM_SCANCODES];
