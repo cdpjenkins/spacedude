@@ -105,9 +105,6 @@ void Game::main_loop() {
         // all we want to do is remove !alive elements from the list
         // TODO pull into a remove_dead_entities() function so at least
         // we don't have to look at it...
-        //
-        // Also this leaks memory because none of the objects we remove get deleted again. Sigh.s
-        // Put this back at some point; gotta remove dead entities...
         entities.erase(
             remove_if(entities.begin(), entities.end(),
                 [](unique_ptr<Entity>& entity) { return !(entity->alive); }),
