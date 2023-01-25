@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include <SDL.h>
-#include <SDL_opengl.h>
 
 #include "Game.hpp"
 #include "SDLContext.hpp"
@@ -13,18 +12,14 @@ Game::Game(SDLContext *sdl) {
 
     dude = new Dude(Vector(600, 400), 0);
 
-    entities.push_back(new Asteroid(Vector(200, 200), Vector(1.3, 0.46), SpriteID::ASTEROID_128));
-    entities.push_back(new Asteroid(Vector(300, 300), Vector(-0.42, -0.2), SpriteID::ASTEROID_128));
-    entities.push_back(new Asteroid(Vector(400, 400), Vector(-1.1, -1.2), SpriteID::ASTEROID_128));
-    entities.push_back(new Asteroid(Vector(500, 500), Vector(-0.9, 2.7), SpriteID::ASTEROID_128));
-    entities.push_back(new Asteroid(Vector(600, 600), Vector(0.7001, 2.2), SpriteID::ASTEROID_128));
+    entities.push_back(make_unique<Asteroid>(Vector(200, 200), Vector(1.3, 0.46), SpriteID::ASTEROID_128));
+    entities.push_back(make_unique<Asteroid>(Vector(300, 300), Vector(-0.42, -0.2), SpriteID::ASTEROID_128));
+    entities.push_back(make_unique<Asteroid>(Vector(400, 400), Vector(-1.1, -1.2), SpriteID::ASTEROID_128));
+    entities.push_back(make_unique<Asteroid>(Vector(500, 500), Vector(-0.9, 2.7), SpriteID::ASTEROID_128));
+    entities.push_back(make_unique<Asteroid>(Vector(600, 600), Vector(0.7001, 2.2), SpriteID::ASTEROID_128));
 }
 
 Game::~Game() {
-    for (auto& entity : entities) {
-        delete entity;
-    }
-
     delete dude;
 }
 
@@ -94,14 +89,16 @@ void Game::main_loop() {
         if (keys[SDL_SCANCODE_F]) {
             Bullet *new_bullet = dude->fire_new_bullet();
             if (new_bullet) {
-                entities.push_back(new_bullet);
+                entities.push_back(unique_ptr<Entity>(new_bullet));
             }
         }
 
         dude->update(entities);
         for (auto const& entity : entities) {
-            list<Entity *> new_entities = entity->update(entities);
-            entities.insert(entities.end(), new_entities.begin(), new_entities.end());
+            list<unique_ptr<Entity>> new_entities = entity->update(entities);
+            for (auto &item: new_entities) {
+                entities.push_back(std::move(item));
+            }
         }
 
         // oh man this is so much more horrible than it needs to be
@@ -110,9 +107,10 @@ void Game::main_loop() {
         // we don't have to look at it...
         //
         // Also this leaks memory because none of the objects we remove get deleted again. Sigh.s
+        // Put this back at some point; gotta remove dead entities...
         entities.erase(
             remove_if(entities.begin(), entities.end(),
-                [](Entity* entity) { return !(entity->alive); }),
+                [](unique_ptr<Entity>& entity) { return !(entity->alive); }),
             entities.end()
         );
 

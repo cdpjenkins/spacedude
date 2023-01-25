@@ -16,7 +16,7 @@ Dude::Dude(Vector position, float theta)
     this->acceleration = 0.01;
 }
 
-list<Entity *> Dude::update(list<Entity *> &all_entities) {
+list<unique_ptr<Entity>> Dude::update(list<unique_ptr<Entity>> &all_entities) {
     Entity::update(all_entities);
 
     if (gun_energy < 0) {

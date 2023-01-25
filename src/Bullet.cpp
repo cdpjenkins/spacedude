@@ -9,7 +9,7 @@ SDL_Texture *Bullet::get_texture(SDLContext *sdl) {
     return sdl->textures[BULLET];
 }
 
-list<Entity *> Bullet::update(list<Entity *> &all_entities) {
+list<unique_ptr<Entity>> Bullet::update(list<unique_ptr<Entity>> &all_entities) {
     Entity::update(all_entities);
 
     lifetime -= 1;
@@ -17,7 +17,7 @@ list<Entity *> Bullet::update(list<Entity *> &all_entities) {
         alive = false;
     } else {
         for (auto& entity : all_entities) {
-            if (entity != this) {
+            if (entity.get() != this) {
                 float distance = this->position.distance_to(entity->position);
 
                 if (distance < sprites[this->sprite_id].collision_radius + sprites[entity->sprite_id].collision_radius) {
@@ -34,8 +34,10 @@ list<Entity *> Bullet::update(list<Entity *> &all_entities) {
                     //
                     // Also need to be smarter about collision detection so we don't have to compare every bullet with
                     // every single asteroid each time. Must... research... clever... algorithms...
-                    if ((asteroid = dynamic_cast<Asteroid *>(entity)) != nullptr) {
-                        list<Entity *> new_asteroids = asteroid->bullet_hit();
+
+                    // oh god this is even worse now!!!1
+                    if ((asteroid = dynamic_cast<Asteroid *>(entity.get())) != nullptr) {
+                        list<unique_ptr<Entity>> new_asteroids = asteroid->bullet_hit();
                         this->alive = false;
                         return new_asteroids;
                     }

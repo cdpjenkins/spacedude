@@ -15,7 +15,7 @@ public:
 
     Dude(Vector position, float theta);
 
-    list<Entity *> update(list<Entity *> &all_entities);
+    list<unique_ptr<Entity>> update(list<unique_ptr<Entity>> &all_entities);
     void draw(SDL_Renderer *renderer, SDLContext *sdl);
     void accelerate_forwards();
     Vector direction();

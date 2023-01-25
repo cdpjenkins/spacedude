@@ -16,7 +16,7 @@ public:
     ~Game();
 
     Dude *dude = NULL;
-    list<Entity*> entities = list<Entity *>();
+    list<unique_ptr<Entity>> entities = {};
 
     void main_loop();
     void render(SDL_Renderer *renderer);

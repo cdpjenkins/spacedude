@@ -5,7 +5,7 @@
 
 using namespace std;
 
-list<Entity *> Entity::update(list<Entity *> &all_entities) {
+list<unique_ptr<Entity>> Entity::update(list<unique_ptr<Entity>> &all_entities) {
     position += velocity;
 
     if (position.x > WIDTH) position.x -= WIDTH;
