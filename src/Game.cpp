@@ -85,9 +85,9 @@ void Game::main_loop() {
             quit = true;
         }
         if (keys[SDL_SCANCODE_F]) {
-            Bullet *new_bullet = dude->fire_new_bullet();
+            unique_ptr<Entity> new_bullet = dude->fire_new_bullet();
             if (new_bullet) {
-                entities.push_back(unique_ptr<Entity>(new_bullet));
+                entities.push_back(std::move(new_bullet));
             }
         }
 

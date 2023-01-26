@@ -59,14 +59,14 @@ Vector Dude::direction() {
     return Vector(dir_x, dir_y);
 }
 
-Bullet *Dude::fire_new_bullet() {
+unique_ptr<Bullet> Dude::fire_new_bullet() {
     if (gun_energy >= 0) {
         Vector bullet_position = position;
         Vector bullet_velocity = velocity + direction() * 5;
 
         gun_energy -= 0;
 
-        return new Bullet(bullet_position, bullet_velocity);
+        return make_unique<Bullet>(bullet_position, bullet_velocity);
     } else {
         return NULL;
     }

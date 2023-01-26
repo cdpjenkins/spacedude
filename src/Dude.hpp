@@ -2,6 +2,9 @@
 #ifndef DUDE_HPP
 #define DUDE_HPP
 
+#include <memory>
+using namespace std;
+
 #include <SDL.h>
 
 #include "SDLContext.hpp"
@@ -19,7 +22,7 @@ public:
     void draw(SDL_Renderer *renderer, SDLContext *sdl);
     void accelerate_forwards();
     Vector direction();
-    Bullet *fire_new_bullet();
+    unique_ptr<Bullet> fire_new_bullet();
 
 private:
     int gun_energy = 0;
