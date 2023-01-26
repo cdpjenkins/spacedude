@@ -32,6 +32,6 @@ void Entity::draw(SDL_Renderer *renderer, SDLContext *sdl) {
 	SDL_RenderCopyEx(renderer, texture, nullptr, &dest, theta, nullptr, SDL_FLIP_NONE);
 }
 
-SDL_Texture *Entity::get_texture(SDLContext *sdl) {
+SDL_Texture *Entity::get_texture(SDLContext *sdl) const {
     return sdl->textures[sprite_id];
 }

@@ -27,7 +27,8 @@ list<unique_ptr<Entity>> Dude::update(list<unique_ptr<Entity>> &all_entities) {
 }
 
 void Dude::draw(SDL_Renderer *renderer, SDLContext *sdl) {
-    // // TODO this is largely duplicated with the implementation in Asteroid right now
+    // TODO this is largely duplicated with the implementation in Asteroid right now
+    // also surely it should be a virtual function
     Vector screen_position = position.to_screen_coords(HEIGHT);
     Vector thang = position + direction() * 100;
 
@@ -51,12 +52,12 @@ void Dude::accelerate_forwards() {
 }
 
 Vector Dude::direction() {
-    float radians = theta * M_PI / 180;
+    auto radians = (float)(theta * M_PI / 180);
 
-    float dir_x = sin(radians);
-    float dir_y = cos(radians);
+    auto dir_x = sin(radians);
+    auto dir_y = cos(radians);
 
-    return Vector(dir_x, dir_y);
+    return {dir_x, dir_y};
 }
 
 unique_ptr<Bullet> Dude::fire_new_bullet() {
