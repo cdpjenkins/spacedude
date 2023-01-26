@@ -15,7 +15,7 @@ const int HEIGHT = 800;
 
 SDL_Texture *load_texture(SDL_Renderer *renderer, const char *texture_filename) {
     SDL_Texture *texture = IMG_LoadTexture(renderer, texture_filename);
-    if (texture == NULL) {
+    if (texture == nullptr) {
         throw exception();
     }
     return texture;
@@ -33,7 +33,7 @@ SDLContext::SDLContext() {
         printf( "Warning: No joysticks connected!\n" );
     } else {
         joystick = SDL_JoystickOpen(0);
-        if( joystick == NULL )
+        if( joystick == nullptr )
         {
             printf( "Warning: Unable to open game controller! SDL Error: %s\n", SDL_GetError() );
             throw exception();
@@ -47,7 +47,7 @@ SDLContext::SDLContext() {
     SDL_Window *window = SDL_CreateWindow("Spacedude!", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                                         WIDTH, HEIGHT,
                                         SDL_WINDOW_SHOWN | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_MOUSE_FOCUS);
-    if (window == NULL) {
+    if (window == nullptr) {
         throw exception();
     }
 

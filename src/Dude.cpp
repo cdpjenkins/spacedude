@@ -35,12 +35,12 @@ void Dude::draw(SDL_Renderer *renderer, SDLContext *sdl) {
 
     int w, h;
 
-    SDL_QueryTexture(get_texture(sdl), NULL, NULL, &w, &h);
+    SDL_QueryTexture(get_texture(sdl), nullptr, nullptr, &w, &h);
     dest.w = w;
     dest.h = h;
     dest.x -= (dest.w / 2);
 	dest.y -= (dest.h / 2);
-	SDL_RenderCopyExF(renderer, get_texture(sdl), NULL, &dest, theta, NULL, SDL_FLIP_NONE);
+	SDL_RenderCopyExF(renderer, get_texture(sdl), nullptr, &dest, theta, nullptr, SDL_FLIP_NONE);
 }
 
 void Dude::accelerate_forwards() {
@@ -68,6 +68,6 @@ unique_ptr<Bullet> Dude::fire_new_bullet() {
 
         return make_unique<Bullet>(bullet_position, bullet_velocity);
     } else {
-        return NULL;
+        return nullptr;
     }
 }
