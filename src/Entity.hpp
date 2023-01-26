@@ -34,7 +34,7 @@ public:
 
     virtual ~Entity() {}
     virtual list<unique_ptr<Entity>> update(list<unique_ptr<Entity>> &all_entities);
-    void draw(SDL_Renderer *renderer, SDLContext *sdl);
+    virtual void draw(SDL_Renderer *renderer, SDLContext *sdl);
     SDL_Texture *get_texture(SDLContext *sdl) const;
     virtual list<unique_ptr<Entity>> bullet_hit() { return {}; };
 };

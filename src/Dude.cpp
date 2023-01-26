@@ -30,15 +30,14 @@ void Dude::draw(SDL_Renderer *renderer, SDLContext *sdl) {
     // TODO this is largely duplicated with the implementation in Asteroid right now
     // also surely it should be a virtual function
     Vector screen_position = position.to_screen_coords(HEIGHT);
-    Vector thang = position + direction() * 100;
 
     SDL_FRect dest = {.x = screen_position.x, .y = screen_position.y};
 
     int w, h;
 
     SDL_QueryTexture(get_texture(sdl), nullptr, nullptr, &w, &h);
-    dest.w = w;
-    dest.h = h;
+    dest.w = static_cast<float>(w);
+    dest.h = static_cast<float>(h);
     dest.x -= (dest.w / 2);
 	dest.y -= (dest.h / 2);
 	SDL_RenderCopyExF(renderer, get_texture(sdl), nullptr, &dest, theta, nullptr, SDL_FLIP_NONE);

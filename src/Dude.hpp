@@ -18,8 +18,8 @@ public:
 
     Dude(Vector position, float theta);
 
-    list<unique_ptr<Entity>> update(list<unique_ptr<Entity>> &all_entities);
-    void draw(SDL_Renderer *renderer, SDLContext *sdl);
+    list<unique_ptr<Entity>> update(list<unique_ptr<Entity>> &all_entities) override;
+    void draw(SDL_Renderer *renderer, SDLContext *sdl) override;
     void accelerate_forwards();
     Vector direction();
     unique_ptr<Bullet> fire_new_bullet();
