@@ -7,9 +7,9 @@
 
 class Asteroid : public Entity {
 public:
-    Asteroid(Vector position, Vector velocity, SpriteID sprite_id);
+    Asteroid(Vector position, const Vector& velocity, SpriteID sprite_id);
 
-    list<unique_ptr<Entity>> bullet_hit();
+    list<unique_ptr<Entity>> bullet_hit() override;
 };
 
 #endif //  ASTEROID_HPP

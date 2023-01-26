@@ -39,12 +39,12 @@ SDLContext::SDLContext() {
             throw exception();
         }
 
-        cout << "We operned joystick 1. It'd better work!!!1" << endl;
+        cout << "We opened joystick 1. It'd better work!!!1" << endl;
     }
 
     IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
 
-    SDL_Window *window = SDL_CreateWindow("Spacedude!", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+    window = SDL_CreateWindow("Spacedude!", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                                         WIDTH, HEIGHT,
                                         SDL_WINDOW_SHOWN | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_MOUSE_FOCUS);
     if (window == nullptr) {

@@ -16,13 +16,9 @@ enum SpriteID {
 
 class Sprite {
 public:
-    SpriteID id;
     float collision_radius;
 
-    Sprite() {}
-    Sprite(SpriteID id, float collision_radius);
-
-    static Sprite make_from_texture(SDL_Renderer *renderer, const char *texture_filename, float collision_radius);
+    Sprite(float collision_radius);
 private:
 
 };

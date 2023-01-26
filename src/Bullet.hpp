@@ -13,8 +13,7 @@ public:
     Bullet(Vector& position, Vector& velocity)
         : Entity(position, velocity, 0, SpriteID::BULLET) {}
 
-    SDL_Texture *get_texture(SDLContext *sdl);
-    list<unique_ptr<Entity>> update(list<unique_ptr<Entity>> &all_entities);
+    list<unique_ptr<Entity>> update(list<unique_ptr<Entity>> &all_entities) override;
 };
 
 #endif // BULLET_HPP

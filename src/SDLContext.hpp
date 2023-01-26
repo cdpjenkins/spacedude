@@ -14,13 +14,13 @@ public:
     SDLContext();
     ~SDLContext();
     
-    SDL_Renderer *renderer = NULL;
+    SDL_Renderer *renderer = nullptr;
 
     SDL_Texture *textures[NUM_SPRITES];
 
 private:
-    SDL_Joystick* joystick = NULL;
-    SDL_Window *window = NULL;
+    SDL_Joystick* joystick = nullptr;
+    SDL_Window *window = nullptr;
 };
 
 #endif // SDL_CONTEXT_HPP

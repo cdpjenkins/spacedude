@@ -1,15 +1,8 @@
-#include <iostream>
 #include <cmath>
 #include <list>
-
-using namespace std;
-
 #include "Dude.hpp"
 #include "Bullet.hpp"
-
 using namespace std;
-
-const float g = 0.005;
 
 Dude::Dude(Vector position, float theta)
     : Entity(position, Vector::ZERO(), theta, SpriteID::DUDE) {

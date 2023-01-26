@@ -21,9 +21,7 @@ public:
     bool alive;
     SpriteID sprite_id;
 
-    SDL_Texture *texture = NULL;
-
-    Entity(Vector& position, Vector velocity, float theta, SpriteID sprite_id) {
+    Entity(Vector& position, const Vector& velocity, float theta, SpriteID sprite_id) {
         this->position = position;
         this->velocity = velocity;
         this->theta = theta;
@@ -32,7 +30,7 @@ public:
         this->alive = true;
     }
 
-    virtual ~Entity() {}
+    virtual ~Entity() = default;
     virtual list<unique_ptr<Entity>> update(list<unique_ptr<Entity>> &all_entities);
     virtual void draw(SDL_Renderer *renderer, SDLContext *sdl);
     SDL_Texture *get_texture(SDLContext *sdl) const;

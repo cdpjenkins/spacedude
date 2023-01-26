@@ -12,7 +12,7 @@ using namespace std;
 
 class Game {
 public:
-    Game(SDLContext *sdl);
+    explicit Game(SDLContext *sdl);
     ~Game();
 
     unique_ptr<Dude> dude = {};

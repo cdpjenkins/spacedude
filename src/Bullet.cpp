@@ -5,10 +5,6 @@
 
 using namespace std;
 
-SDL_Texture *Bullet::get_texture(SDLContext *sdl) {
-    return sdl->textures[BULLET];
-}
-
 list<unique_ptr<Entity>> Bullet::update(list<unique_ptr<Entity>> &all_entities) {
     Entity::update(all_entities);
 

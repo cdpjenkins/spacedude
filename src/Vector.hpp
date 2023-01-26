@@ -43,47 +43,19 @@ struct Vector {
     }
 
     // probably not the best place to put this long run...
-    inline Vector to_screen_coords(float height) {
-        return Vector(x, height - y);
+    [[nodiscard]]
+    inline Vector to_screen_coords(float height) const {
+        return {x, height - y};
     }
 
     inline static Vector ZERO() {
-        return Vector(0, 0);
+        return {0, 0};
     }
 
-    inline float distance_to(Vector& that) {
+    inline float distance_to(Vector& that) const {
         float x_dist = this->x - that.x;
         float y_dist = this->y - that.y;
         return sqrtf(x_dist*x_dist + y_dist*y_dist);
-    }
-};
-
-class Matrix {
-    float m11, m21;
-    float m12, m22;
-
-    Matrix(float m11, float m21, float m12, float m22) {
-        this->m11 = m11;
-        this->m21 = m21;
-        this->m12 = m12;
-        this->m22 = m22;
-    }
-
-    Vector operator*(const Vector& rhs) {
-        return Vector(
-            m11 * rhs.x + m21 * rhs.y,
-            m12 * rhs.x + m22 * rhs.y
-        );
-    }
-
-    static Matrix rotation(float theta) {
-        float radians = theta * M_PI / 180;
-
-        // remember we are rotating clockwise
-        return Matrix(
-            cos(radians),  sin(radians),
-            -sin(radians), cos(radians)
-        );
     }
 };
 

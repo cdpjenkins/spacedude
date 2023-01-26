@@ -17,7 +17,6 @@ list<unique_ptr<Entity>> Entity::update(list<unique_ptr<Entity>> &all_entities) 
 }
 
 void Entity::draw(SDL_Renderer *renderer, SDLContext *sdl) {
-    int w, h;
     float x = position.x;
     float y = HEIGHT - position.y;
 

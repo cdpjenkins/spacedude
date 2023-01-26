@@ -6,7 +6,7 @@
 
 using namespace std;
 
-Asteroid::Asteroid(Vector position, Vector velocity, SpriteID sprite_id)
+Asteroid::Asteroid(Vector position, const Vector& velocity, SpriteID sprite_id)
     : Entity(position, velocity, 0, sprite_id) {}
 
 float random_thang() {

@@ -19,7 +19,7 @@ Game::Game(SDLContext *sdl) :
     entities.push_back(make_unique<Asteroid>(Vector(600, 600), Vector(0.7001, 2.2), SpriteID::ASTEROID_128));
 }
 
-Game::~Game() {}
+Game::~Game() = default;
 
 void Game::main_loop() {
     bool keys[SDL_NUM_SCANCODES];
@@ -66,7 +66,7 @@ void Game::main_loop() {
         }
 
         if (joystick_x != 0 && joystick_y != 0) {
-            dude->theta = atan2(joystick_x, -joystick_y) * 180 / M_PI;
+            dude->theta = static_cast<float>(atan2(joystick_x, -joystick_y) * 180 / M_PI);
         }
 
         if (keys[SDL_SCANCODE_UP]) {
