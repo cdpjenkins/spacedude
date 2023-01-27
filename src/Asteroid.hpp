@@ -11,7 +11,7 @@ public:
 
     list<unique_ptr<Entity>> bullet_hit() override;
 
-    list<unique_ptr<Entity>> try_bullet_hit(Bullet &bullet, list<unique_ptr<Entity>> &entities) override;;
+    bool try_bullet_hit(Bullet &bullet, list<unique_ptr<Entity>> &entities) override;;
 };
 
 #endif //  ASTEROID_HPP

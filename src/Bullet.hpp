@@ -13,7 +13,7 @@ public:
     Bullet(Vector& position, Vector& velocity)
         : Entity(position, velocity, 0, SpriteID::BULLET) {}
 
-    list<unique_ptr<Entity>> update(list<unique_ptr<Entity>> &all_entities) override;
+    void update(list<unique_ptr<Entity>> &all_entities) override;
 };
 
 #endif // BULLET_HPP

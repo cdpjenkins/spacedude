@@ -33,12 +33,12 @@ public:
     }
 
     virtual ~Entity() = default;
-    virtual list<unique_ptr<Entity>> update(list<unique_ptr<Entity>> &all_entities);
+    virtual void update(list<unique_ptr<Entity>> &all_entities);
     virtual void draw(SDL_Renderer *renderer, SDLContext *sdl);
     SDL_Texture *get_texture(SDLContext *sdl) const;
     virtual list<unique_ptr<Entity>> bullet_hit() { return {}; };
 
-    virtual list<unique_ptr<Entity>> try_bullet_hit(Bullet &bullet, list<unique_ptr<Entity>> &entities) { return {}; };
+    virtual bool try_bullet_hit(Bullet &bullet, list<unique_ptr<Entity>> &entities) { return {}; };
 };
 
 #endif // ENTITY_HPP

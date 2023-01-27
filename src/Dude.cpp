@@ -9,14 +9,12 @@ Dude::Dude(Vector position, float theta)
     this->acceleration = 0.01;
 }
 
-list<unique_ptr<Entity>> Dude::update(list<unique_ptr<Entity>> &all_entities) {
+void Dude::update(list<unique_ptr<Entity>> &all_entities) {
     Entity::update(all_entities);
 
     if (gun_energy < 0) {
         gun_energy++;
     }
-
-    return {};
 }
 
 void Dude::draw(SDL_Renderer *renderer, SDLContext *sdl) {

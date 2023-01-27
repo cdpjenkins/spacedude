@@ -5,15 +5,13 @@ using namespace std;
 
 using namespace std;
 
-list<unique_ptr<Entity>> Entity::update(list<unique_ptr<Entity>> &all_entities) {
+void Entity::update(list<unique_ptr<Entity>> &all_entities) {
     position += velocity;
 
     if (position.x > WIDTH) position.x -= WIDTH;
     if (position.x < 0) position.x += WIDTH;
     if (position.y > HEIGHT) position.y -= HEIGHT;
     if (position.y < 0) position.y += HEIGHT;
-
-    return {};
 }
 
 void Entity::draw(SDL_Renderer *renderer, SDLContext *sdl) {

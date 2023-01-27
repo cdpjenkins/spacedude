@@ -93,10 +93,7 @@ void Game::main_loop() {
 
         dude->update(entities);
         for (auto const& entity : entities) {
-            list<unique_ptr<Entity>> new_entities = entity->update(entities);
-            for (auto &item: new_entities) {
-                entities.push_back(std::move(item));
-            }
+            entity->update(entities);
         }
 
         // oh man this is so much more horrible than it needs to be

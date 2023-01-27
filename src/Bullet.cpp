@@ -4,7 +4,7 @@
 
 using namespace std;
 
-list<unique_ptr<Entity>> Bullet::update(list<unique_ptr<Entity>> &all_entities) {
+void Bullet::update(list<unique_ptr<Entity>> &all_entities) {
     Entity::update(all_entities);
 
     lifetime -= 1;
@@ -17,12 +17,10 @@ list<unique_ptr<Entity>> Bullet::update(list<unique_ptr<Entity>> &all_entities) 
         // https://www.toptal.com/game/video-game-physics-part-ii-collision-detection-for-solid-objects
         // e.g. sort-and-sweep
         for (auto &entity: all_entities) {
-            auto maybe_fragments = entity->try_bullet_hit(*this, all_entities);
-            if (!maybe_fragments.empty()) {
-                return maybe_fragments;
+            bool did_the_bullet_hit_us = entity->try_bullet_hit(*this, all_entities);
+            if (did_the_bullet_hit_us) {
+                return;
             }
         }
     }
-
-    return {};
 }

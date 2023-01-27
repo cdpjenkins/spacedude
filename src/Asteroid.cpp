@@ -39,7 +39,7 @@ list<unique_ptr<Entity>> Asteroid::bullet_hit() {
     return new_asteroids;
 }
 
-list<unique_ptr<Entity>> Asteroid::try_bullet_hit(Bullet &bullet, list<unique_ptr<Entity>> &entities) {
+bool Asteroid::try_bullet_hit(Bullet &bullet, list<unique_ptr<Entity>> &entities) {
     float distance = this->position.distance_to(bullet.position);
     if (distance < sprites[this->sprite_id].collision_radius + sprites[bullet.sprite_id].collision_radius) {
         list<unique_ptr<Entity>> new_asteroids = this->bullet_hit();
@@ -49,8 +49,8 @@ list<unique_ptr<Entity>> Asteroid::try_bullet_hit(Bullet &bullet, list<unique_pt
         for (unique_ptr<Entity> &item: new_asteroids) {
             entities.push_back(std::move(item));
         }
-        return {};
+        return true;
     } else {
-        return {};
+        return false;
     }
 }
