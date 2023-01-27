@@ -43,6 +43,8 @@ public:
     virtual bool try_player_hit(Player &bullet, list<unique_ptr<Entity>> &entities) { return false; };
 
     bool collides_with(Entity &that) const;
+
+    float collision_radius() const;
 };
 
 #endif // ENTITY_HPP

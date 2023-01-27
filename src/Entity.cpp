@@ -38,6 +38,7 @@ SDL_Texture *Entity::get_texture(SDLContext *sdl) const {
 
 bool Entity::collides_with(Entity &that) const {
     float distance = position.distance_to(that.position);
-    bool collides = distance < sprites[sprite_id].collision_radius + sprites[that.sprite_id].collision_radius;
-    return collides;
+    return distance < this->collision_radius() + that.collision_radius();
 }
+
+float Entity::collision_radius() const { return sprites[sprite_id].collision_radius; }

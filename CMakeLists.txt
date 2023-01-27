@@ -17,6 +17,7 @@ add_executable(spacedude
         src/Entity.cpp
         src/Game.cpp
         src/SDLContext.cpp
+        src/Shield.cpp
         src/Sprite.cpp
         src/main.cpp)
 

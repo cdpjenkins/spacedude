@@ -7,16 +7,17 @@ using namespace std;
 
 #include <SDL.h>
 
-#include "SDLContext.hpp"
-#include "Entity.hpp"
-#include "Vector.hpp"
 #include "Bullet.hpp"
+#include "Entity.hpp"
+#include "SDLContext.hpp"
+#include "Shield.hpp"
+#include "Vector.hpp"
 
 class Player : public Entity {
 public:
     float acceleration = 0.01;
 
-    Player(Vector position, float theta);
+    Player(Vector positionf, float theta);
 
     void update(list<unique_ptr<Entity>> &all_entities) override;
     void draw(SDL_Renderer *renderer, SDLContext *sdl) override;
@@ -26,6 +27,7 @@ public:
 
 private:
     int gun_energy = 0;
+    Shield shield;
 };
 
 #endif // DUDE_HPP

@@ -16,15 +16,20 @@ void Player::update(list<unique_ptr<Entity>> &all_entities) {
     Entity::update(all_entities);
 
     for (const auto &entity: all_entities) {
-        bool hit = entity->try_player_hit(*this, all_entities);
-        if (hit) {
-            cout << "Hit asteroid!!! " << (++hits) << endl;
+        if (!shield.is_active()) {
+            bool hit = entity->try_player_hit(*this, all_entities);
+            if (hit) {
+                cout << "Hit asteroid!!! " << (++hits) << endl;
+                shield.activate();
+            }
         }
     }
 
     if (gun_energy < 0) {
         gun_energy++;
     }
+
+    shield.update();
 }
 
 void Player::draw(SDL_Renderer *renderer, SDLContext *sdl) {
@@ -42,6 +47,14 @@ void Player::draw(SDL_Renderer *renderer, SDLContext *sdl) {
     dest.x -= (dest.w / 2);
 	dest.y -= (dest.h / 2);
 	SDL_RenderCopyExF(renderer, get_texture(sdl), nullptr, &dest, theta, nullptr, SDL_FLIP_NONE);
+
+    SDL_SetRenderDrawColor(renderer, 155, 215, 240, shield.strength() * 2);
+    SDL_Rect rect = {(int)(screen_position.x - collision_radius()),
+                     (int)(screen_position.y - collision_radius()),
+                     (int)(collision_radius() * 2),
+                     (int)(collision_radius() * 2)};
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+    SDL_RenderFillRect(renderer, &rect);
 }
 
 void Player::accelerate_forwards() {
