@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "Asteroid.hpp"
+#include "Bullet.hpp"
 
 using namespace std;
 
@@ -36,4 +37,20 @@ list<unique_ptr<Entity>> Asteroid::bullet_hit() {
     }
 
     return new_asteroids;
+}
+
+list<unique_ptr<Entity>> Asteroid::try_bullet_hit(Bullet &bullet, list<unique_ptr<Entity>> &entities) {
+    float distance = this->position.distance_to(bullet.position);
+    if (distance < sprites[this->sprite_id].collision_radius + sprites[bullet.sprite_id].collision_radius) {
+        list<unique_ptr<Entity>> new_asteroids = this->bullet_hit();
+        this->alive = false;
+        bullet.alive = false;
+
+        for (unique_ptr<Entity> &item: new_asteroids) {
+            entities.push_back(std::move(item));
+        }
+        return {};
+    } else {
+        return {};
+    }
 }

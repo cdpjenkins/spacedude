@@ -10,6 +10,8 @@ public:
     Asteroid(Vector position, const Vector& velocity, SpriteID sprite_id);
 
     list<unique_ptr<Entity>> bullet_hit() override;
+
+    list<unique_ptr<Entity>> try_bullet_hit(Bullet &bullet, list<unique_ptr<Entity>> &entities) override;;
 };
 
 #endif //  ASTEROID_HPP

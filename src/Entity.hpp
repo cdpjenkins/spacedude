@@ -9,6 +9,8 @@ using namespace std;
 #include "SDLContext.hpp"
 #include "Vector.hpp"
 
+class Bullet;
+
 class Entity {
 public:
     // this is the wrong place for this!
@@ -35,6 +37,8 @@ public:
     virtual void draw(SDL_Renderer *renderer, SDLContext *sdl);
     SDL_Texture *get_texture(SDLContext *sdl) const;
     virtual list<unique_ptr<Entity>> bullet_hit() { return {}; };
+
+    virtual list<unique_ptr<Entity>> try_bullet_hit(Bullet &bullet, list<unique_ptr<Entity>> &entities) { return {}; };
 };
 
 #endif // ENTITY_HPP
