@@ -28,6 +28,8 @@ private:
 
     int joystick_x = 0;
     int joystick_y = 0;
+
+    void cull_dead_entities();
 };
 
 #endif // GAME_HPP
