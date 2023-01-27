@@ -11,6 +11,4 @@ void Shield::update() {
     if (is_active()) {
         active_for--;
     }
-
-    cout << active_for << endl;
 }
