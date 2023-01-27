@@ -9,7 +9,7 @@ using namespace std;
 
 Game::Game(SDLContext *sdl) :
     sdl(sdl),
-    dude(make_unique<Dude>(Vector(600, 400), 0))
+    dude(make_unique<Player>(Vector(600, 400), 0))
 
 {
     entities.push_back(make_unique<Asteroid>(Vector(200, 200), Vector(1.3, 0.46), SpriteID::ASTEROID_128));

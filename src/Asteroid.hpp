@@ -12,7 +12,7 @@ public:
     list<unique_ptr<Entity>> shatter(list<unique_ptr<Entity>> &all_entities) override;
 
     bool try_bullet_hit(Bullet &bullet, list<unique_ptr<Entity>> &entities) override;
-    bool try_player_hit(Dude &bullet, list<unique_ptr<Entity>> &entities);;
+    bool try_player_hit(Player &player, list<unique_ptr<Entity>> &entities);;
 
 };
 

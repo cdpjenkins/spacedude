@@ -11,14 +11,14 @@ find_package(SDL2_image REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS})
 
 add_executable(spacedude
-    src/Asteroid.cpp
-    src/Bullet.cpp
-    src/Dude.cpp
-    src/Entity.cpp
-    src/Game.cpp
-    src/SDLContext.cpp
-    src/Sprite.cpp
-    src/main.cpp)
+        src/Asteroid.cpp
+        src/Bullet.cpp
+        src/Player.cpp
+        src/Entity.cpp
+        src/Game.cpp
+        src/SDLContext.cpp
+        src/Sprite.cpp
+        src/main.cpp)
 
 target_link_libraries(spacedude ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 

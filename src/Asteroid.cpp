@@ -4,7 +4,7 @@
 
 #include "Asteroid.hpp"
 #include "Bullet.hpp"
-#include "Dude.hpp"
+#include "Player.hpp"
 #include "Entity.hpp"
 
 using namespace std;
@@ -51,8 +51,8 @@ bool Asteroid::try_bullet_hit(Bullet &bullet, list<unique_ptr<Entity>> &entities
 
 // TODO - remove duplication a-plenty in this method
 // probably by just pulling everything into shatter() and renaming that
-bool Asteroid::try_player_hit(Dude &bullet, list<unique_ptr<Entity>> &entities) {
-    if (collides_with(bullet)) {
+bool Asteroid::try_player_hit(Player &player, list<unique_ptr<Entity>> &entities) {
+    if (collides_with(player)) {
         // TODO some negative consequences for the player, perchance...
         this->shatter(entities);
 

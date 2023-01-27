@@ -3,7 +3,7 @@
 
 #include <list>
 
-#include "Dude.hpp"
+#include "Player.hpp"
 #include "Asteroid.hpp"
 #include "Bullet.hpp"
 #include "SDLContext.hpp"
@@ -15,7 +15,7 @@ public:
     explicit Game(SDLContext *sdl);
     ~Game();
 
-    unique_ptr<Dude> dude = {};
+    unique_ptr<Player> dude = {};
     list<unique_ptr<Entity>> entities = {};
 
     void main_loop();

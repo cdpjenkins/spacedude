@@ -1,7 +1,5 @@
-#include "Dude.hpp"
+#include "Player.hpp"
 #include "Bullet.hpp"
-#include "Asteroid.hpp"
-#include <iostream>
 #include <SDL.h>
 #include <list>
 using namespace std;

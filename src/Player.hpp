@@ -12,11 +12,11 @@ using namespace std;
 #include "Vector.hpp"
 #include "Bullet.hpp"
 
-class Dude : public Entity {
+class Player : public Entity {
 public:
     float acceleration = 0.01;
 
-    Dude(Vector position, float theta);
+    Player(Vector position, float theta);
 
     void update(list<unique_ptr<Entity>> &all_entities) override;
     void draw(SDL_Renderer *renderer, SDLContext *sdl) override;

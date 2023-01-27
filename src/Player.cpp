@@ -1,16 +1,16 @@
 #include <cmath>
 #include <iostream>
 #include <list>
-#include "Dude.hpp"
+#include "Player.hpp"
 #include "Bullet.hpp"
 using namespace std;
 
-Dude::Dude(Vector position, float theta)
+Player::Player(Vector position, float theta)
     : Entity(position, Vector::ZERO(), theta, SpriteID::DUDE) {
     this->acceleration = 0.01;
 }
 
-void Dude::update(list<unique_ptr<Entity>> &all_entities) {
+void Player::update(list<unique_ptr<Entity>> &all_entities) {
     static int hits = 0;
 
     Entity::update(all_entities);
@@ -27,7 +27,7 @@ void Dude::update(list<unique_ptr<Entity>> &all_entities) {
     }
 }
 
-void Dude::draw(SDL_Renderer *renderer, SDLContext *sdl) {
+void Player::draw(SDL_Renderer *renderer, SDLContext *sdl) {
     // TODO this is largely duplicated with the implementation in Asteroid right now
     // also surely it should be a virtual function
     Vector screen_position = position.to_screen_coords(HEIGHT);
@@ -44,14 +44,14 @@ void Dude::draw(SDL_Renderer *renderer, SDLContext *sdl) {
 	SDL_RenderCopyExF(renderer, get_texture(sdl), nullptr, &dest, theta, nullptr, SDL_FLIP_NONE);
 }
 
-void Dude::accelerate_forwards() {
+void Player::accelerate_forwards() {
     Vector dir = direction();
     dir *= acceleration;
 
     velocity += dir;
 }
 
-Vector Dude::direction() {
+Vector Player::direction() {
     auto radians = (float)(theta * M_PI / 180);
 
     auto dir_x = sin(radians);
@@ -60,7 +60,7 @@ Vector Dude::direction() {
     return {dir_x, dir_y};
 }
 
-unique_ptr<Bullet> Dude::fire_new_bullet() {
+unique_ptr<Bullet> Player::fire_new_bullet() {
     if (gun_energy >= 0) {
         Vector bullet_position = position;
         Vector bullet_velocity = velocity + direction() * 5;
