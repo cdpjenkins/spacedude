@@ -1,4 +1,5 @@
 #include <cmath>
+#include <iostream>
 #include <list>
 #include "Dude.hpp"
 #include "Bullet.hpp"
@@ -10,7 +11,16 @@ Dude::Dude(Vector position, float theta)
 }
 
 void Dude::update(list<unique_ptr<Entity>> &all_entities) {
+    static int hits = 0;
+
     Entity::update(all_entities);
+
+    for (const auto &entity: all_entities) {
+        bool hit = entity->try_player_hit(*this, all_entities);
+        if (hit) {
+            cout << "Hit asteroid!!! " << (++hits) << endl;
+        }
+    }
 
     if (gun_energy < 0) {
         gun_energy++;

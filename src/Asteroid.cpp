@@ -4,6 +4,8 @@
 
 #include "Asteroid.hpp"
 #include "Bullet.hpp"
+#include "Dude.hpp"
+#include "Entity.hpp"
 
 using namespace std;
 
@@ -14,41 +16,46 @@ float random_thang() {
     return rand() / float(RAND_MAX) - 0.5;
 }
 
-list<unique_ptr<Entity>> Asteroid::bullet_hit() {
+list<unique_ptr<Entity>> Asteroid::shatter(list<unique_ptr<Entity>> &all_entities) {
     this->alive = false;
 
-    list<unique_ptr<Entity>> new_asteroids = {};
-    
     if (this->sprite_id != ASTEROID_8) {
-        new_asteroids.push_back(make_unique<Asteroid>(
+        all_entities.push_back(make_unique<Asteroid>(
             position,
             Vector(velocity.x + random_thang(), velocity.y + random_thang()),
              static_cast<SpriteID>(sprite_id + 1)));
 
-        new_asteroids.push_back(make_unique<Asteroid>(
+        all_entities.push_back(make_unique<Asteroid>(
             position,
             Vector(velocity.x + random_thang(), velocity.y + random_thang()),
              static_cast<SpriteID>(sprite_id + 1)));
 
-        new_asteroids.push_back(make_unique<Asteroid>(
+        all_entities.push_back(make_unique<Asteroid>(
             position,
             Vector(velocity.x + random_thang(), velocity.y + random_thang()),
              static_cast<SpriteID>(sprite_id + 1)));
     }
 
-    return new_asteroids;
+    return {};
 }
 
 bool Asteroid::try_bullet_hit(Bullet &bullet, list<unique_ptr<Entity>> &entities) {
-    float distance = this->position.distance_to(bullet.position);
-    if (distance < sprites[this->sprite_id].collision_radius + sprites[bullet.sprite_id].collision_radius) {
-        list<unique_ptr<Entity>> new_asteroids = this->bullet_hit();
-        this->alive = false;
+    if (collides_with(bullet)) {
         bullet.alive = false;
+        this->shatter(entities);
+        return true;
+    } else {
+        return false;
+    }
+}
 
-        for (unique_ptr<Entity> &item: new_asteroids) {
-            entities.push_back(std::move(item));
-        }
+// TODO - remove duplication a-plenty in this method
+// probably by just pulling everything into shatter() and renaming that
+bool Asteroid::try_player_hit(Dude &bullet, list<unique_ptr<Entity>> &entities) {
+    if (collides_with(bullet)) {
+        // TODO some negative consequences for the player, perchance...
+        this->shatter(entities);
+
         return true;
     } else {
         return false;

@@ -1,3 +1,8 @@
+#include "Dude.hpp"
+#include "Bullet.hpp"
+#include "Asteroid.hpp"
+#include <iostream>
+#include <SDL.h>
 #include <list>
 using namespace std;
 
@@ -31,4 +36,10 @@ void Entity::draw(SDL_Renderer *renderer, SDLContext *sdl) {
 
 SDL_Texture *Entity::get_texture(SDLContext *sdl) const {
     return sdl->textures[sprite_id];
+}
+
+bool Entity::collides_with(Entity &that) const {
+    float distance = position.distance_to(that.position);
+    bool collides = distance < sprites[sprite_id].collision_radius + sprites[that.sprite_id].collision_radius;
+    return collides;
 }

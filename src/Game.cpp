@@ -29,9 +29,9 @@ void Game::main_loop() {
     bool quit = false;
     Uint32 last_ticks = 0;
     while (!quit){
-        Uint32 new_ticks = SDL_GetTicks();
-        cout << new_ticks - last_ticks << endl;
-        last_ticks = new_ticks;
+//        Uint32 new_ticks = SDL_GetTicks();
+//        cout << new_ticks - last_ticks << endl;
+//        last_ticks = new_ticks;
 
         while (SDL_PollEvent(&e)){
             switch (e.type) {

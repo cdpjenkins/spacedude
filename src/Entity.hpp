@@ -10,6 +10,7 @@ using namespace std;
 #include "Vector.hpp"
 
 class Bullet;
+class Dude;
 
 class Entity {
 public:
@@ -36,9 +37,12 @@ public:
     virtual void update(list<unique_ptr<Entity>> &all_entities);
     virtual void draw(SDL_Renderer *renderer, SDLContext *sdl);
     SDL_Texture *get_texture(SDLContext *sdl) const;
-    virtual list<unique_ptr<Entity>> bullet_hit() { return {}; };
+    virtual list<unique_ptr<Entity>> shatter(list<unique_ptr<Entity>> &list1) { return {}; };
 
     virtual bool try_bullet_hit(Bullet &bullet, list<unique_ptr<Entity>> &entities) { return {}; };
+    virtual bool try_player_hit(Dude &bullet, list<unique_ptr<Entity>> &entities) { return false; };
+
+    bool collides_with(Entity &that) const;
 };
 
 #endif // ENTITY_HPP
