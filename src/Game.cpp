@@ -33,37 +33,7 @@ void Game::main_loop() {
 //        cout << new_ticks - last_ticks << endl;
 //        last_ticks = new_ticks;
 
-        while (SDL_PollEvent(&e)){
-            switch (e.type) {
-                case SDL_QUIT:
-                    quit = true;
-                    break;
-                case SDL_KEYUP:
-                    keys[e.key.keysym.scancode] = false;
-                    break;
-                case SDL_KEYDOWN:
-                    keys[e.key.keysym.scancode] = true;
-                    break;
-                case SDL_JOYAXISMOTION:
-                    if(e.jaxis.axis == 0 ) {
-                        cout << "Joystick x: " << e.jaxis.value << endl;
-                        if (abs(e.jaxis.value) > JOYSTICK_DEAD_ZONE) {
-                            joystick_x = e.jaxis.value;
-                        } else {
-                            joystick_x = 0;
-                        }
-                    } else if (e.jaxis.axis == 1) {
-                        cout << "Joystick y: " << e.jaxis.value << endl;
-                        if (abs(e.jaxis.value) > JOYSTICK_DEAD_ZONE) {
-                            joystick_y = e.jaxis.value;
-                        } else {
-                            joystick_y = 0;
-                        }
-                    } else {
-                        cout << "Something else: " << e.jaxis.axis << endl;
-                    }
-            }
-        }
+        quit = handle_sdl_events(keys, e);
 
         if (joystick_x != 0 && joystick_y != 0) {
             dude->theta = static_cast<float>(atan2(joystick_x, -joystick_y) * 180 / M_PI);
@@ -100,6 +70,42 @@ void Game::main_loop() {
 
         render(sdl->renderer);
     }
+}
+
+bool Game::handle_sdl_events(bool *keys, SDL_Event &e) {
+    bool quit;
+    while (SDL_PollEvent(&e)){
+        switch (e.type) {
+            case SDL_QUIT:
+                quit = true;
+                break;
+            case SDL_KEYUP:
+                keys[e.key.keysym.scancode] = false;
+                break;
+            case SDL_KEYDOWN:
+                keys[e.key.keysym.scancode] = true;
+                break;
+            case SDL_JOYAXISMOTION:
+                if(e.jaxis.axis == 0 ) {
+                    cout << "Joystick x: " << e.jaxis.value << endl;
+                    if (abs(e.jaxis.value) > JOYSTICK_DEAD_ZONE) {
+                        joystick_x = e.jaxis.value;
+                    } else {
+                        joystick_x = 0;
+                    }
+                } else if (e.jaxis.axis == 1) {
+                    cout << "Joystick y: " << e.jaxis.value << endl;
+                    if (abs(e.jaxis.value) > JOYSTICK_DEAD_ZONE) {
+                        joystick_y = e.jaxis.value;
+                    } else {
+                        joystick_y = 0;
+                    }
+                } else {
+                    cout << "Something else: " << e.jaxis.axis << endl;
+                }
+        }
+    }
+    return quit;
 }
 
 void Game::cull_dead_entities() {

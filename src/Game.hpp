@@ -30,6 +30,8 @@ private:
     int joystick_y = 0;
 
     void cull_dead_entities();
+
+    bool handle_sdl_events(bool *keys, SDL_Event &e);
 };
 
 #endif // GAME_HPP
