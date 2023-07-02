@@ -34,6 +34,8 @@ public:
     }
 
     virtual ~Entity() = default;
+    Entity(Entity const &) = delete;
+    Entity& operator=(Entity const &) = delete;
     virtual void update(list<unique_ptr<Entity>> &all_entities);
     virtual void draw(SDL_Renderer *renderer, SDLContext *sdl);
     SDL_Texture *get_texture(SDLContext *sdl) const;
