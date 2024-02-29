@@ -5,10 +5,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
 set (CMAKE_CXX_STANDARD 20)
 
-find_package(SDL2 REQUIRED)
-find_package(SDL2_image REQUIRED)
-
-include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS})
+find_package(SDL2 CONFIG REQUIRED)
+find_package(SDL2_image CONFIG REQUIRED)
 
 add_executable(spacedude
         src/Asteroid.cpp
@@ -21,7 +19,10 @@ add_executable(spacedude
         src/Sprite.cpp
         src/main.cpp)
 
-target_link_libraries(spacedude ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+target_link_libraries(spacedude
+        PRIVATE $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>
+        PRIVATE $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main> $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>
+)
 
 file(
     COPY assets
