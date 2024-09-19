@@ -73,7 +73,7 @@ void Game::main_loop() {
 }
 
 bool Game::handle_sdl_events(bool *keys, SDL_Event &e) {
-    bool quit;
+    bool quit{false};
     while (SDL_PollEvent(&e)){
         switch (e.type) {
             case SDL_QUIT:
