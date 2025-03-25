@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 #include "Game.hpp"
 #include "SDLContext.hpp"
@@ -21,18 +21,25 @@ Game::Game(SDLContext *sdl) :
 
 Game::~Game() = default;
 
+void Game::limit_frame_rate(Uint32 frame_start) {
+    Uint32 frame_time = SDL_GetTicks() - frame_start;
+    if (frame_time < FRAME_DELAY) {
+        auto delay_by = FRAME_DELAY - frame_time;
+        SDL_Delay(delay_by);
+        // cout << "Delayed by: " << delay_by << "ms" << endl;
+    }
+}
+
 void Game::main_loop() {
     bool keys[SDL_NUM_SCANCODES];
     memset(keys, 0, sizeof(keys));
 
     SDL_Event e;
     bool quit = false;
-    Uint32 last_ticks = 0;
-    while (!quit){
-//        Uint32 new_ticks = SDL_GetTicks();
-//        cout << new_ticks - last_ticks << endl;
-//        last_ticks = new_ticks;
-
+    
+    while (!quit) {
+        Uint32 frame_start = SDL_GetTicks();
+        
         quit = handle_sdl_events(keys, e);
 
         if (joystick_x != 0 && joystick_y != 0) {
@@ -69,6 +76,8 @@ void Game::main_loop() {
         cull_dead_entities();
 
         render(sdl->renderer);
+        
+        limit_frame_rate(frame_start);
     }
 }
 

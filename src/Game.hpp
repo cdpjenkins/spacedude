@@ -23,6 +23,8 @@ public:
 
 private:
     const int JOYSTICK_DEAD_ZONE = 1000;
+    const int TARGET_FPS = 60;
+    const int FRAME_DELAY = 1000 / TARGET_FPS;  // Time per frame in milliseconds
 
     SDLContext *sdl;
 
@@ -32,6 +34,7 @@ private:
     void cull_dead_entities();
 
     bool handle_sdl_events(bool *keys, SDL_Event &e);
+    void limit_frame_rate(Uint32 frame_start);
 };
 
 #endif // GAME_HPP
